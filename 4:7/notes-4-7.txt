@@ -1,0 +1,67 @@
+
+Scoping
+=====
+
+For a given reference to (or use of) a variable, which declaration
+does it refer to?
+
+- global declarations
+
+   let x = 3;;
+   let double n = n * 2;;
+
+- local declarations
+
+  let x = 3 in
+    x+4
+
+  let x = e1 in e2
+    - x is only in scope in e2
+
+  let rec x = e1 in e2
+   - x is in scope in both e1 and e2
+
+ - function parameters
+   - n in the double function above
+
+   (function x -> e)
+     - x is only in scope in e
+
+In all cases above, can generalize x to an arbitrary pattern p.     
+     
+- match expressions
+
+  match e with
+    p1 -> e1
+  | ...
+  | pn -> en
+
+*Static (lexical) scoping*:
+ - a variable use refers to the nearest enclosing definition of that
+   variable
+ 
+(block structuring)
+
+Alternative is *dynamic scoping*:
+ - a variable use refers to the nearest enclosing definition *at the
+   point of the use dynamically*
+
+let double n = n * 2;;
+
+n;; --> crash (both static and dynamic scoping)
+
+double 3  --> evaluate n*2 in a new scope that augments the current
+scope with the knowledge that n maps to 3 --> 6
+   
+let add =
+   (function x ->
+      function y -> x+y)
+
+let addTwo = add 2
+  --> evaluate (function y -> x+y) in a new scope that augments the
+  current scope with the knowledge that x maps to 2
+
+addTwo 8 --> evaluate x+y in a new scope that augments the current
+scope with the knowledge that y maps to 8
+  - current scope does not have a binding for x, so we crash!
+

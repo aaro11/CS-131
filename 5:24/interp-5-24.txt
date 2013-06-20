@@ -1,0 +1,1002 @@
+Macintosh.local:/Users/todd
+Macintosh /Users/todd [12] -> cd cs131/notes/
+Macintosh.local:/Users/todd/cs131/notes
+Macintosh /Users/todd/cs131/notes [13] -> gprolog
+GNU Prolog 1.3.1
+By Daniel Diaz
+Copyright (C) 1999-2009 Daniel Diaz
+| ?- hello = hello.
+
+yes
+| ?- hello = hi.
+
+no
+| ?- parent(adam, bob) = parent(adam, bob).
+
+yes
+| ?- parent(adam, bob) = parent(adam, X).  
+
+X = bob
+
+yes
+| ?- consult(courses).
+compiling /Users/todd/work/course/cs131/2011/notes/courses.pl for byte code...
+/Users/todd/work/course/cs131/2011/notes/courses.pl compiled, 17 lines read - 1449 bytes written, 8 ms
+
+(1 ms) yes
+| ?- prereq(cs32,cs33).
+
+true ? ;
+
+no
+| ?- prereq(cs32,cs33).
+
+true ? .
+Action (; for next solution, a for all solutions, RET to stop) ? 
+
+(1 ms) yes
+| ?- prereq(cs32,cs33).
+
+true ? 
+
+yes
+| ?- prereq(cs32,cs33).
+
+true ? ;
+
+no
+| ?- prereq(cs33,cs32).
+
+no
+| ?- prereq(cs131, X). 
+
+X = cs132
+
+yes
+| ?- prereq(cs32, X). 
+
+X = cs33 ? ;
+
+X = cs111 ? ;
+
+X = cs118 ? ;
+
+X = cs131 ? ;
+
+X = cs132
+
+(1 ms) yes
+| ?- prereq(X, cs131).
+
+X = cs32 ? ;
+
+X = cs33 ? ;
+
+no
+| ?- prereq(X, Y).    
+
+X = cs31
+Y = cs32 ? ;
+
+X = cs32
+Y = cs33 ? ;
+
+X = phys1C
+Y = csM51A ? ;
+
+X = cs32
+Y = cs111 ? ;
+
+X = cs33
+Y = cs111 ? ;
+
+X = stat110A
+Y = cs112 ? ;
+
+X = cs32
+Y = cs118 ? ;
+
+X = cs33
+Y = cs118 ? ;
+
+X = cs32
+Y = cs131 ? ;
+
+X = cs33
+Y = cs131 ? ;
+
+X = cs32
+Y = cs132 ? ;
+
+X = cs131
+Y = cs132 ? ;
+
+X = cs181
+Y = cs132
+
+(1 ms) yes
+| ?- prereq(X, X).
+
+no
+| ?- prereq(cs32, X), prereq(cs32, Y).
+
+X = cs33
+Y = cs33 ? ;
+
+X = cs33
+Y = cs111 ? ;
+
+X = cs33
+Y = cs118 ? ;
+
+X = cs33
+Y = cs131 ? ;
+
+X = cs33
+Y = cs132 ? ;
+
+X = cs111
+Y = cs33 ? ;
+
+X = cs111
+Y = cs111 ? ;
+
+X = cs111
+Y = cs118 ? ;
+
+X = cs111
+Y = cs131 ? ;
+
+X = cs111
+Y = cs132 ? ;
+
+X = cs118
+Y = cs33 ? ;
+
+X = cs118
+Y = cs111 ? ;
+
+X = cs118
+Y = cs118 ? ;
+
+X = cs118
+Y = cs131 ? ;
+
+X = cs118
+Y = cs132 ? ;
+
+X = cs131
+Y = cs33 ? ;
+
+X = cs131
+Y = cs111 ? ;
+
+X = cs131
+Y = cs118 ? ;
+
+X = cs131
+Y = cs131 ? ;
+
+X = cs131
+Y = cs132 ? ;
+
+X = cs132
+Y = cs33 ? ;
+
+X = cs132
+Y = cs111 ? ;
+
+X = cs132
+Y = cs118 ? ;
+
+X = cs132
+Y = cs131 ? ;
+
+X = cs132
+Y = cs132
+
+(3 ms) yes
+| ?- prereq(cs32, X), prereq(cs32, Y), \+(X=y).
+
+X = cs33
+Y = cs33 ? ;
+
+X = cs33
+Y = cs111 ? ;
+
+X = cs33
+Y = cs118 ? ;
+
+X = cs33
+Y = cs131 ? ;
+
+X = cs33
+Y = cs132 ? ;
+
+X = cs111
+Y = cs33 ? ;
+
+X = cs111
+Y = cs111 ? ;
+
+X = cs111
+Y = cs118 ? ;
+
+X = cs111
+Y = cs131 ? ;
+
+X = cs111
+Y = cs132 ? ;
+
+X = cs118
+Y = cs33 ? ;
+
+X = cs118
+Y = cs111 ? ;
+
+X = cs118
+Y = cs118 ? ;
+
+X = cs118
+Y = cs131 ? 
+Prolog interruption (h for help) ? 
+   a  abort        b  break
+   c  continue     e  exit
+   d  debug        t  trace
+  h/? help
+
+Prolog interruption (h for help) ? 
+   a  abort        b  break
+   c  continue     e  exit
+   d  debug        t  trace
+  h/? help
+
+Prolog interruption (h for help) ? c
+
+(2 ms) yes
+| ?- prereq(cs32, X), prereq(cs32, Y), \+(X=Y).
+
+X = cs33
+Y = cs111 ? ;
+
+X = cs33
+Y = cs118 ? ;
+
+X = cs33
+Y = cs131 ? ;
+
+X = cs33
+Y = cs132 ? ;
+
+X = cs111
+Y = cs33 ? 
+
+(1 ms) yes
+| ?- prereq(cs32, X), prereq(X, cs132).        
+
+X = cs131 ? ;
+
+no
+| ?- prereq(X,Z), prereq(Y,Z), \+(X=Y).
+
+X = cs32
+Y = cs33
+Z = cs111 ? ;
+
+X = cs33
+Y = cs32
+Z = cs111 ? ;
+
+X = cs32
+Y = cs33
+Z = cs118 ? ;
+
+X = cs33
+Y = cs32
+Z = cs118 ? ;
+
+X = cs32
+Y = cs33
+Z = cs131 ? ;
+
+X = cs33
+Y = cs32
+Z = cs131 ? ;
+
+X = cs32
+Y = cs131
+Z = cs132 ? ;
+
+X = cs32
+Y = cs181
+Z = cs132 ? ;
+
+X = cs131
+Y = cs32
+Z = cs132 ? ;
+
+X = cs131
+Y = cs181
+Z = cs132 ? ;
+
+X = cs181
+Y = cs32
+Z = cs132 ? ;
+
+X = cs181
+Y = cs131
+Z = cs132 ? ;
+
+(1 ms) no
+| ?- prereq(X,Z), prereq(Z, cs131).    
+
+X = cs31
+Z = cs32 ? ;
+
+X = cs32
+Z = cs33 ? ;
+
+no
+| ?- consult(courses).                 
+compiling /Users/todd/work/course/cs131/2011/notes/courses.pl for byte code...
+/Users/todd/work/course/cs131/2011/notes/courses.pl compiled, 26 lines read - 1739 bytes written, 9 ms
+
+(1 ms) yes
+| ?- prereq2(X,Z).
+
+X = cs31
+Z = cs33 ? ;
+
+X = cs31
+Z = cs111 ? ;
+
+X = cs31
+Z = cs118 ? ;
+
+X = cs31
+Z = cs131 ? ;
+
+X = cs31
+Z = cs132 ? ;
+
+X = cs32
+Z = cs111 ? ;
+
+X = cs32
+Z = cs118 ? ;
+
+X = cs32
+Z = cs131 ? ;
+
+X = cs32
+Z = cs132 ? ;
+
+X = cs33
+Z = cs132 ? ;
+
+(1 ms) no
+| ?- prereq2(X,cs131).
+
+X = cs31 ? ;
+
+X = cs32 ? ;
+
+(1 ms) no
+| ?- prereq2(cs32, X).
+
+X = cs111 ? ;
+
+X = cs118 ? ;
+
+X = cs131 ? ;
+
+X = cs132 ? ;
+
+no
+| ?- prereq2(U,V).    
+
+U = cs31
+V = cs33 ? ;
+
+U = cs31
+V = cs111 ? ;
+
+U = cs31
+V = cs118 ? ;
+
+U = cs31
+V = cs131 ? ;
+
+U = cs31
+V = cs132 ? ;
+
+U = cs32
+V = cs111 ? ;
+
+U = cs32
+V = cs118 ? ;
+
+U = cs32
+V = cs131 ? ;
+
+U = cs32
+V = cs132 ? ;
+
+U = cs33
+V = cs132 ? ;
+
+(1 ms) no
+| ?- prereq(X, cs131).             
+
+X = cs32 ? ;
+
+X = cs33 ? ;
+
+no
+| ?- prereq2(X, cs131).
+
+X = cs31 ? ;
+
+X = cs32 ? ;
+
+no
+| ?- consult(courses).             
+compiling /Users/todd/work/course/cs131/2011/notes/courses.pl for byte code...
+/Users/todd/work/course/cs131/2011/notes/courses.pl compiled, 28 lines read - 1804 bytes written, 9 ms
+
+(1 ms) yes
+| ?- prereq2(X, cs131).
+
+X = cs31 ? ;
+
+X = cs32 ? ;
+
+X = cs32 ? ;
+
+X = cs33 ? ;
+
+no
+| ?- consult(courses). 
+compiling /Users/todd/work/course/cs131/2011/notes/courses.pl for byte code...
+/Users/todd/work/course/cs131/2011/notes/courses.pl compiled, 41 lines read - 2522 bytes written, 9 ms
+
+(1 ms) yes
+| ?- ancestor(X, cs131).
+
+X = cs32 ? ;
+
+X = cs33 ? ;
+
+X = cs31 ? ;
+
+X = cs31 ? ;
+
+X = cs32 ? ;
+
+(1 ms) no
+| ?- ancestor(cs33, X). 
+
+X = cs111 ? ;
+
+X = cs118 ? ;
+
+X = cs131 ? ;
+
+X = cs132 ? ;
+
+(1 ms) no
+| ?- ancestor(X, Y).   
+
+X = cs31
+Y = cs32 ? ;
+
+X = cs32
+Y = cs33 ? ;
+
+X = phys1C
+Y = csM51A ? ;
+
+X = cs32
+Y = cs111 ? ;
+
+X = cs33
+Y = cs111 ? ;
+
+X = stat110A
+Y = cs112 ? ;
+
+X = cs32
+Y = cs118 ? ;
+
+X = cs33
+Y = cs118 ? ;
+
+X = cs32
+Y = cs131 ? ;
+
+X = cs33
+Y = cs131 ? ;
+
+X = cs32
+Y = cs132 ? ;
+
+X = cs131
+Y = cs132 ? ;
+
+X = cs181
+Y = cs132 ? ;
+
+X = cs31
+Y = cs33 ? ;
+
+X = cs31
+Y = cs111 ? ;
+
+X = cs31
+Y = cs118 ? ;
+
+X = cs31
+Y = cs131 ? 
+
+(2 ms) yes
+| ?- 1+4 = 5.
+
+no
+| ?- 1+4 =:= 5.
+
+(1 ms) yes
+| ?- 1+4 > 5.  
+
+no
+| ?- 1+4 > 3.
+
+yes
+| ?- 1+X > 3.
+uncaught exception: error(instantiation_error,(>)/2)
+| ?- [1,2].
+uncaught exception: error(type_error(atom,1),consult/1)
+| ?- [1,2] = [1,2]. 
+
+yes
+| ?- [1,2] = .(1, .(2, [])).
+
+yes
+| ?- [_,2] = [1,2].         
+
+yes
+| ?- [X,2] = [1,2].
+
+X = 1
+
+yes
+| ?- [X|XS] = [1,2,3,4].
+
+X = 1
+XS = [2,3,4]
+
+(1 ms) yes
+| ?- [X,Y|XS] = [1,2,3,4].
+
+X = 1
+XS = [3,4]
+Y = 2
+
+yes
+| ?- append([1,2],[3,4],Z).
+
+Z = [1,2,3,4]
+
+yes
+| ?- append([1,2],Y,[1,2,3,4]).    
+
+Y = [3,4]
+
+yes
+| ?- append(X,Y,[1,2,3,4]).    
+
+X = []
+Y = [1,2,3,4] ? ;
+
+X = [1]
+Y = [2,3,4] ? ;
+
+X = [1,2]
+Y = [3,4] ? ;
+
+X = [1,2,3]
+Y = [4] ? ;
+
+X = [1,2,3,4]
+Y = [] ? ;
+
+(1 ms) no
+| ?- consult(courses).         
+compiling /Users/todd/work/course/cs131/2011/notes/courses.pl for byte code...
+/Users/todd/work/course/cs131/2011/notes/courses.pl compiled, 67 lines read - 2868 bytes written, 9 ms
+error: /Users/todd/work/course/cs131/2011/notes/courses.pl:65: native code procedure append/3 cannot be redefined (ignored)
+
+(1 ms) yes
+| ?- consult(courses).
+compiling /Users/todd/work/course/cs131/2011/notes/courses.pl for byte code...
+/Users/todd/work/course/cs131/2011/notes/courses.pl compiled, 68 lines read - 2878 bytes written, 11 ms
+
+yes
+| ?- myappend([1,2], [3,4], Z).
+
+Z = [1,2,3,4]
+
+yes
+| ?- myappend([1,2], Y, [1,2,3,4]).    
+
+Y = [3,4]
+
+yes
+| ?- myappend(X, Y, [1,2,3,4]).    
+
+X = []
+Y = [1,2,3,4] ? ;
+
+X = [1]
+Y = [2,3,4] ? ;
+
+X = [1,2]
+Y = [3,4] ? ;
+
+X = [1,2,3]
+Y = [4] ? ;
+
+X = [1,2,3,4]
+Y = [] ? ;
+
+(1 ms) no
+| ?- myappend([], Y, Z).        
+
+Z = Y
+
+yes
+| ?- myappend(X, Y, Z).            
+
+X = []
+Z = Y ? ;
+
+X = [A]
+Z = [A|Y] ? ;
+
+X = [A,B]
+Z = [A,B|Y] ? ;
+
+X = [A,B,C]
+Z = [A,B,C|Y] ? ;
+
+X = [A,B,C,D]
+Z = [A,B,C,D|Y] ? ;
+
+X = [A,B,C,D,E]
+Z = [A,B,C,D,E|Y] ? ;
+
+X = [A,B,C,D,E,F]
+Z = [A,B,C,D,E,F|Y] ? ;
+
+X = [A,B,C,D,E,F,G]
+Z = [A,B,C,D,E,F,G|Y] ? ;
+
+X = [A,B,C,D,E,F,G,H]
+Z = [A,B,C,D,E,F,G,H|Y] ? ;
+
+X = [A,B,C,D,E,F,G,H,I]
+Z = [A,B,C,D,E,F,G,H,I|Y] ? ;
+
+X = [A,B,C,D,E,F,G,H,I,J]
+Z = [A,B,C,D,E,F,G,H,I,J|Y] ? ;
+
+X = [A,B,C,D,E,F,G,H,I,J,K]
+Z = [A,B,C,D,E,F,G,H,I,J,K|Y] ? ;
+
+X = [A,B,C,D,E,F,G,H,I,J,K,L]
+Z = [A,B,C,D,E,F,G,H,I,J,K,L|Y] ? ;
+
+X = [A,B,C,D,E,F,G,H,I,J,K,L,M]
+Z = [A,B,C,D,E,F,G,H,I,J,K,L,M|Y] ? ;
+
+X = [A,B,C,D,E,F,G,H,I,J,K,L,M,N]
+Z = [A,B,C,D,E,F,G,H,I,J,K,L,M,N|Y] ? ;
+
+X = [A,B,C,D,E,F,G,H,I,J,K,L,M,N,O]
+Z = [A,B,C,D,E,F,G,H,I,J,K,L,M,N,O|Y] ? ;
+
+X = [A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P]
+Z = [A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P|Y] ? ;
+
+X = [A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q]
+Z = [A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q|Y] ? ;
+
+X = [A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R]
+Z = [A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R|Y] ? ;
+
+X = [A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S]
+Z = [A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S|Y] ? ;
+
+X = [A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T]
+Z = [A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T|Y] ? ;
+
+X = [A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U]
+Z = [A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U|Y] ? ;
+
+X = [A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V]
+Z = [A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V|Y] ? ;
+
+X = [A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W]
+Z = [A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W|Y] ? ;
+
+X = [A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,A1]
+Z = [A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,A1|Y] ? ;
+
+X = [A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,A1,B1]
+Z = [A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,A1,B1|Y] ? ;
+
+X = [A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,A1,B1,C1]
+Z = [A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,A1,B1,C1|Y] ? ;
+
+X = [A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,A1,B1,C1,D1]
+Z = [A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,A1,B1,C1,D1|Y] ? ;
+
+X = [A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,A1,B1,C1,D1,E1]
+Z = [A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,A1,B1,C1,D1,E1|Y] ? ;
+
+X = [A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,A1,B1,C1,D1,E1,F1]
+Z = [A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,A1,B1,C1,D1,E1,F1|Y] ? ;
+
+X = [A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,A1,B1,C1,D1,E1,F1,G1]
+Z = [A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,A1,B1,C1,D1,E1,F1,G1|Y] ? ;
+
+X = [A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,A1,B1,C1,D1,E1,F1,G1,H1]
+Z = [A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,A1,B1,C1,D1,E1,F1,G1,H1|Y] ? ;
+
+X = [A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,A1,B1,C1,D1,E1,F1,G1,H1,I1]
+Z = [A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,A1,B1,C1,D1,E1,F1,G1,H1,I1|Y] ? ;
+
+X = [A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,A1,B1,C1,D1,E1,F1,G1,H1,I1,J1]
+Z = [A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,A1,B1,C1,D1,E1,F1,G1,H1,I1,J1|Y] ? ;
+
+X = [A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,A1,B1,C1,D1,E1,F1,G1,H1,I1,J1,K1]
+Z = [A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,A1,B1,C1,D1,E1,F1,G1,H1,I1,J1,K1|Y] ? ;
+
+X = [A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,A1,B1,C1,D1,E1,F1,G1,H1,I1,J1,K1,L1]
+Z = [A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,A1,B1,C1,D1,E1,F1,G1,H1,I1,J1,K1,L1|Y] ? ;
+
+X = [A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,A1,B1,C1,D1,E1,F1,G1,H1,I1,J1,K1,L1,M1]
+Z = [A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,A1,B1,C1,D1,E1,F1,G1,H1,I1,J1,K1,L1,M1|Y] ? ;
+
+X = [A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,A1,B1,C1,D1,E1,F1,G1,H1,I1,J1,K1,L1,M1,N1]
+Z = [A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,A1,B1,C1,D1,E1,F1,G1,H1,I1,J1,K1,L1,M1,N1|Y] ? ;
+
+X = [A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,A1,B1,C1,D1,E1,F1,G1,H1,I1,J1,K1,L1,M1,N1,O1]
+Z = [A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,A1,B1,C1,D1,E1,F1,G1,H1,I1,J1,K1,L1,M1,N1,O1|Y] ? ;
+
+X = [A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,A1,B1,C1,D1,E1,F1,G1,H1,I1,J1,K1,L1,M1,N1,O1,P1]
+Z = [A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,A1,B1,C1,D1,E1,F1,G1,H1,I1,J1,K1,L1,M1,N1,O1,P1|Y] ? ;
+
+X = [A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,A1,B1,C1,D1,E1,F1,G1,H1,I1,J1,K1,L1,M1,N1,O1,P1,Q1]
+Z = [A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,A1,B1,C1,D1,E1,F1,G1,H1,I1,J1,K1,L1,M1,N1,O1,P1,Q1|Y] ? ;
+
+X = [A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,A1,B1,C1,D1,E1,F1,G1,H1,I1,J1,K1,L1,M1,N1,O1,P1,Q1,R1]
+Z = [A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,A1,B1,C1,D1,E1,F1,G1,H1,I1,J1,K1,L1,M1,N1,O1,P1,Q1,R1|Y] ? ;
+
+X = [A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,A1,B1,C1,D1,E1,F1,G1,H1,I1,J1,K1,L1,M1,N1,O1,P1,Q1,R1,S1]
+Z = [A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,A1,B1,C1,D1,E1,F1,G1,H1,I1,J1,K1,L1,M1,N1,O1,P1,Q1,R1,S1|Y] ? 
+
+(6 ms) yes
+| ?- consult(courses).             
+compiling /Users/todd/work/course/cs131/2011/notes/courses.pl for byte code...
+/Users/todd/work/course/cs131/2011/notes/courses.pl:73: warning: singleton variables [X] for mylength/2
+/Users/todd/work/course/cs131/2011/notes/courses.pl compiled, 72 lines read - 3370 bytes written, 9 ms
+
+yes
+| ?- mylength([], X).
+
+X = 0
+
+(1 ms) yes
+| ?- mylength([1,2,3], X).
+uncaught exception: error(instantiation_error,(=:=)/2)
+| ?- Y is 1+3.
+
+Y = 4
+
+yes
+| ?- consult(courses).    
+compiling /Users/todd/work/course/cs131/2011/notes/courses.pl for byte code...
+/Users/todd/work/course/cs131/2011/notes/courses.pl:73: warning: singleton variables [X] for mylength/2
+/Users/todd/work/course/cs131/2011/notes/courses.pl compiled, 72 lines read - 3368 bytes written, 9 ms
+
+(1 ms) yes
+| ?- mylength([1,2,3], X).
+
+X = 3
+
+yes
+| ?- mylength(L, 1).      
+
+L = [_] ? ;
+^C
+Prolog interruption (h for help) ? c
+
+^C
+Prolog interruption (h for help) ? 
+   a  abort        b  break
+   c  continue     e  exit
+   d  debug        t  trace
+  h/? help
+
+Prolog interruption (h for help) ? a
+execution aborted
+| ?- prereq(Z,X), prereq(Z,Y).
+
+X = cs32
+Y = cs32
+Z = cs31 ? ;
+
+X = cs33
+Y = cs33
+Z = cs32 ? ;
+
+X = cs33
+Y = cs111
+Z = cs32 ? ;
+
+X = cs33
+Y = cs118
+Z = cs32 ? ;
+
+X = cs33
+Y = cs131
+Z = cs32 ? ;
+
+X = cs33
+Y = cs132
+Z = cs32 ? ;
+
+X = csM51A
+Y = csM51A
+Z = phys1C ? ;
+
+X = cs111
+Y = cs33
+Z = cs32 ? 
+
+yes
+| ?- prereq(Z,X), prereq(Z,Y), \+(X=Y).
+
+X = cs33
+Y = cs111
+Z = cs32 ? 
+
+yes
+| ?- \+(X=Y), prereq(Z,X), prereq(Z,Y).
+
+no
+| ?- X=Y.
+
+Y = X
+
+yes
+| ?- consult(courses).                 
+compiling /Users/todd/work/course/cs131/2011/notes/courses.pl for byte code...
+/Users/todd/work/course/cs131/2011/notes/courses.pl:67-68: warning: singleton variables [Xs,Xss] for myappend/3
+/Users/todd/work/course/cs131/2011/notes/courses.pl:73: warning: singleton variables [X] for mylength/2
+/Users/todd/work/course/cs131/2011/notes/courses.pl compiled, 72 lines read - 3378 bytes written, 10 ms
+
+(1 ms) yes
+| ?- consult(courses).
+compiling /Users/todd/work/course/cs131/2011/notes/courses.pl for byte code...
+/Users/todd/work/course/cs131/2011/notes/courses.pl:73: warning: singleton variables [X] for mylength/2
+/Users/todd/work/course/cs131/2011/notes/courses.pl compiled, 72 lines read - 3369 bytes written, 9 ms
+
+yes
+| ?- consult(courses).
+compiling /Users/todd/work/course/cs131/2011/notes/courses.pl for byte code...
+/Users/todd/work/course/cs131/2011/notes/courses.pl compiled, 72 lines read - 3368 bytes written, 12 ms
+
+(1 ms) yes
+| ?- consult(boat).
+compiling /Users/todd/work/course/cs131/2011/notes/boat.pl for byte code...
+/Users/todd/work/course/cs131/2011/notes/boat.pl:39: warning: singleton variables [C] for badState/1
+/Users/todd/work/course/cs131/2011/notes/boat.pl:41: warning: singleton variables [W] for badState/1
+/Users/todd/work/course/cs131/2011/notes/boat.pl:52:37: syntax error: . or operator expected after expression
+	1 error(s)
+compilation failed
+
+no
+| ?- consult(boat).
+compiling /Users/todd/work/course/cs131/2011/notes/boat.pl for byte code...
+/Users/todd/work/course/cs131/2011/notes/boat.pl compiled, 51 lines read - 3772 bytes written, 9 ms
+
+yes
+| ?- boatPuzzle([west,west,west,west], [east,east,east,east], Actions).
+
+Fatal Error: local stack overflow (size: 8192 Kb, environment variable used: LOCALSZ)
+Macintosh /Users/todd/cs131/notes [14] -> gprolog
+GNU Prolog 1.3.1
+By Daniel Diaz
+Copyright (C) 1999-2009 Daniel Diaz
+| ?- consult(boat).
+compiling /Users/todd/work/course/cs131/2011/notes/boat.pl for byte code...
+/Users/todd/work/course/cs131/2011/notes/boat.pl compiled, 51 lines read - 3772 bytes written, 10 ms
+
+(1 ms) yes
+| ?- length(Actions, 5), boatPuzzle([west,west,west,west], [east,east,east,east], Actions).
+
+no
+| ?- length(Actions, 7), boatPuzzle([west,west,west,west], [east,east,east,east], Actions).
+
+Actions = [goat,nothing,wolf,goat,cabbage,nothing,goat] ? ;
+
+Actions = [goat,nothing,cabbage,goat,wolf,nothing,goat] ? ;
+
+(1 ms) no
+| ?- length(Actions, X), X<7, boatPuzzle([west,west,west,west], [east,east,east,east], Actions).
+
+Fatal Error: global stack overflow (size: 16385 Kb, environment variable used: GLOBALSZ)
+Macintosh /Users/todd/cs131/notes [15] -> gprolog
+GNU Prolog 1.3.1
+By Daniel Diaz
+Copyright (C) 1999-2009 Daniel Diaz
+| ?- X<7, length(Actions, X), boatPuzzle([west,west,west,west], [east,east,east,east], Actions)
+.
+uncaught exception: error(instantiation_error,(<)/2)
+| ?- length(Actions, 10), boatPuzzle([west,west,west,west], [east,east,east,east], Actions).   
+uncaught exception: error(existence_error(procedure,boatPuzzle/3),top_level/0)
+| ?- consult(boat).
+compiling /Users/todd/work/course/cs131/2011/notes/boat.pl for byte code...
+/Users/todd/work/course/cs131/2011/notes/boat.pl compiled, 51 lines read - 3772 bytes written, 9 ms
+
+(1 ms) yes
+| ?- length(Actions, 10), boatPuzzle([west,west,west,west], [east,east,east,east], Actions).
+
+(6 ms) no
+| ?- length(Actions, 9), boatPuzzle([west,west,west,west], [east,east,east,east], Actions). 
+
+Actions = [goat,nothing,nothing,nothing,wolf,goat,cabbage,nothing,goat] ? ;
+
+Actions = [goat,nothing,nothing,nothing,cabbage,goat,wolf,nothing,goat] ? ;
+
+Actions = [goat,nothing,wolf,wolf,wolf,goat,cabbage,nothing,goat] ? ;
+
+Actions = [goat,nothing,wolf,wolf,cabbage,goat,wolf,nothing,goat] ? ;
+
+Actions = [goat,nothing,wolf,goat,goat,goat,cabbage,nothing,goat] ? ;
+
+Actions = [goat,nothing,wolf,goat,cabbage,nothing,nothing,nothing,goat] ? ;
+
+Actions = [goat,nothing,wolf,goat,cabbage,nothing,goat,goat,goat] ? ;
+
+Actions = [goat,nothing,wolf,goat,cabbage,wolf,wolf,nothing,goat] ? ;
+
+Actions = [goat,nothing,wolf,goat,cabbage,cabbage,cabbage,nothing,goat] ? ;
+
+Actions = [goat,nothing,cabbage,goat,wolf,nothing,nothing,nothing,goat] ? ;
+
+Actions = [goat,nothing,cabbage,goat,wolf,nothing,goat,goat,goat] ? ;
+
+Actions = [goat,nothing,cabbage,goat,wolf,wolf,wolf,nothing,goat] ? ;
+
+Actions = [goat,nothing,cabbage,goat,wolf,cabbage,cabbage,nothing,goat] ? ;
+
+Actions = [goat,nothing,cabbage,goat,goat,goat,wolf,nothing,goat] ? ;
+
+Actions = [goat,nothing,cabbage,cabbage,wolf,goat,cabbage,nothing,goat] ? ;
+
+Actions = [goat,nothing,cabbage,cabbage,cabbage,goat,wolf,nothing,goat] ? ;
+
+Actions = [goat,goat,goat,nothing,wolf,goat,cabbage,nothing,goat] ? ;
+
+Actions = [goat,goat,goat,nothing,cabbage,goat,wolf,nothing,goat] ? ;
+
+(5 ms) no
+| ?- length(Actions, 7), boatPuzzle([west,west,west,west], [east,east,east,east], Actions).
+
+Actions = [goat,nothing,wolf,goat,cabbage,nothing,goat] ? ;
+
+Actions = [goat,nothing,cabbage,goat,wolf,nothing,goat] ? ;
+
+(1 ms) no

@@ -1,0 +1,187 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+lang="en"><head><title>Homework 1</title>
+</head>
+
+
+<body>
+
+<h1>Homework 1</h1>
+
+<h2>Due Wednesday, April 6, at 11:30pm</h2>
+<h3>Turn in your homework via the course web page as an updated version of the <tt>hw1.ml</tt>
+text file that I have provided. 
+
+<h3>Make sure the file can be successfully loaded into the OCaml interpreter
+via the <tt>#use</tt> directive; if not you get an automatic 0 for the homework!</h3>
+
+<h3>Recall the CS131 Academic Honesty Policy!  You must say whom you
+discussed the assignment with at the top of your assignment, and also what
+other resources you used.</h3>
+
+For this assignment, you will get practice implementing a number of
+functions in ML.  As important as getting the right behavior is using
+the style that is natural for ML and its unique language features.
+<b>You will lose style points if any of the following rules are disobeyed</b>:
+
+<ul> <li> <i>Never</i> use imperative features like
+assignment and loops.  If you're using a construct not discussed in
+class or in the book, you're probably doing something bad!</li> <li>
+Use pattern matching instead of conditionals wherever it is possible
+to do so.</li> <li> Use local variables to avoid recomputing an
+expression that is needed multiple times in a function.</li>
+<li>Similarly, avoid code duplication.  If the same code is needed in
+multiple places, possibly with slight variations, make a helper function
+so that the code only has to be written once.</li>
+</ul>
+
+A few other tips: <ul> <li>Remember the key to solving problems with
+recursion: Assume you have the result of the recursive call, and then
+figure out how to turn that result into the overall answer you desire.</li>
+<li>Create any number of helper functions as needed.
+</li>
+<li> Write comments where useful to tell the
+reader what's going on.  Comments in ML are enclosed in <tt>(*</tt>
+and <tt>*)</tt>.  The grader should be able to easily understand what
+your code is doing.  One useful comment is to provide the type of any
+helper function that you define.</li>
+
+<li> Test your functions on several inputs, including corner cases --
+we will be doing the same.</li>
+</ul>
+
+Now on to the assignment!  I've provided a file <tt>hw1.ml</tt> that declares all the functions you must implement along with their expected types.  Right now each has a dummy, incorrect implementation.  Your job is to modify each function's body to do the right thing.  <b>You will not need to modify anything but the function's body;  if you modify the function's name or type,
+you are doing something wrong!</b> 
+<ol>
+<li> Write a function <tt>fib</tt> of type <tt>int -> int</tt>
+  that takes a nonnegative integer
+<tt>n</tt> and computes the <tt>n</tt>th Fibonacci number.
+The Fibonacci series has a natural recursive definition,
+which can be used directly to implement your function:  The 0th
+Fibonacci number is 0.  The 1st Fibonacci number is 1.  The <i>n</i>th
+Fibonacci number, where n is an integer greater than 1, is the sum of
+the (n-1)st and (n-2)nd Fibonacci numbers.
+  It's fine if your implementation is wildly inefficient.</li>
+
+<p><li>Write a function <tt>clone</tt> of type <tt>'a * int -> 'a
+list</tt>.  The function takes an item <tt>e</tt> and a nonnegative
+integer <tt>n</tt> and
+returns a list containing <tt>n</tt> copies of <tt>e</tt>.  For
+example, <tt>clone("hi", 4)</tt> returns <tt>["hi"; "hi"; "hi";
+"hi"]</tt>.</li>
+
+<p><li>Write a function <tt>allPos</tt> of type <tt>int list -> int list</tt>
+that takes a list of integers and returns a list containing all and only
+the positive elements of the original list (in the same order).  For example,
+the result of <tt>allPos [1;-2;3;4;-5]</tt> is <tt>[1;3;4]</tt>.
+
+
+<p><li>Write a function <tt>everyOther</tt> of type <tt>'a list -> 'a list</tt>
+that takes a list and returns a list containing every other element
+of the original list (in the same order), starting with the first element.
+For example,
+the result of <tt>everyOther [1;-2;3;4;-5]</tt> is <tt>[1;3;-5]</tt>.
+Also, the result of <tt>everyOther []</tt> is <tt>[]</tt>.
+
+<p><li> Write a function <tt>tails</tt> of type <tt>'a list -> 'a list list</tt>
+that takes a list and returns a
+list of lists containing the original list along with all tails of the
+list, from longest to shortest.  For example, <tt>tails [1;2;3]</tt> is
+<tt>[[1;2;3];[2;3];[3];[]]</tt>.</li>
+
+<p>
+<li>Write a function <tt>reverse</tt> of type <tt>'a list -> 'a
+list</tt> that reverses the elements of a list.  <b>You may not simply invoke the function that reverses a list from the OCaml standard library; instead write your own recursive function to do the reversal.</b></li>
+
+<p>
+<li>The natural way to write <tt>reverse</tt> takes O(n<sup>2</sup>)
+time, where n is the size of the input list.  In particular, there are
+O(n<sup>2</sup>) <i>cons</i> calls (<tt>::</tt> in ML).
+The reason is that each
+call to append (<tt>@</tt> in ML) does a cons for each element of the
+left-hand list (recall the way we defined <tt>append</tt> in class).
+Therefore, <tt>reverse</tt> performs 1 + 2 + ... + n conses for a list
+of size n.
+
+<p> In this problem, you will implement a much more efficient
+algorithm for reversing a list, which only requires a linear number of
+conses.  Call this function <tt>fastRev</tt>; it will have the same
+type as <tt>reverse</tt>.  The key to <tt>fastRev</tt> is that it
+builds the reversed list as we recurse over the input list, rather
+than as we return from each recursive call.  This is similar to how
+  an iterative version of list reversal, as implemented in a language like C,
+  would naturally work.
+  
+<p>  To get the right behavior, your
+<tt>fastRev</tt> function should use
+a local
+helper function <tt>revHelper</tt> to do most of the work.
+The helper function should
+take two arguments:  (1) the suffix of the input list that remains
+to be reversed; (2) the reversal of the first part of the input list.  The helper function
+should return the complete reversed list.
+Therefore the reversal of an input list
+<tt>l</tt> can be performed via the invocation <tt>revHelper(l,
+[])</tt>.  I've provided this setup for you in the homework file, so all you have to do is
+provide the implementation of <tt>revHelper</tt>.
+
+<p>
+The second parameter to <tt>revHelper</tt> is known as an
+<i>accumulating parameter</i>, since it accumulates the result as we recurse.
+This manner of transforming recursive functions to compute their results as they
+recurse down, instead of on the way back up, is a common way to speed up
+recursive functions.  In fact, most compilers for functional programming
+languages automatically perform this transformation when possible.
+
+<p>Make sure that <tt>fastRev</tt> is indeed much faster than
+<tt>reverse</tt>.  On my machine, I can clearly see the difference in
+running times of the invocations <tt>fastRev(clone(0, 10000))</tt> and
+<tt>reverse(clone(0, 10000))</tt>.  Increase the size of the list if
+you can't see the difference.</li>
+
+<p> <li> Consider the following recursive datatype representing the
+allowed arithmetic expressions in a simple calculator:
+
+<p><tt>type opn = Add | Sub | Mult | Divide</tt><br>
+<tt>type aexp = Num of float | Opn of aexp * opn * aexp</tt>
+
+<p> Values of type <tt>aexp</tt> represent <i>parse trees</i> for
+arithmetic expressions.  For example, the expression <tt>(1.0 +. 2.0) *. 3.0</tt> would be
+represented by the
+value <tt>Opn(Opn(Num 1.0, Add, Num 2.0), Mult, Num 3.0)</tt>.
+
+<p>Write a function <tt>evalAExp</tt> of type <tt>aexp -> float</tt>
+that evaluates a given arithmetic expression.  For example, the result of evaluating our expression above should be <tt>9.0</tt>.
+</li>
+
+<p><li> Some HP calculators and some programming languages (e.g., the
+Java virtual machine language) evaluate expressions using a stack.  An arithmetic computation is expressed as a sequence (i.e., a list) of operations, each of which is represented as a value of the following datatype:
+
+<p><tt>type sopn = Push of float | DoOpn of opn</tt>
+
+<p>The operations are defined to manipulate a stack of floating point
+numbers (which we'll represent as a <tt>float list</tt>).  The
+operation <tt>Push n</tt> pushes the number <tt>n</tt> onto the stack
+(thereby increasing the stack size by 1).  The operation <tt>DoOpn
+op</tt> pops the top two numbers <tt>n1</tt> and <tt>n2</tt> off the stack and pushes the result
+of evaluating <tt>(n2 op n1)</tt> onto the stack (thereby decreasing the stack size by 1).  <i>Note that the first operand in the computation is the second value popped off the stack, and the second operand is the first value popped off the stack.  This makes a difference for non-commutative operations like subtraction and division.  This behavior makes sense since it corresponds with the order in which the operands were originally computed (and pushed onto the stack).</i>
+
+<p>For example, the arithmetic expression <tt>(1.0 +. 2.0) *. 3.0</tt> can be represented
+by the sequence of stack operations <tt>[Push 1.0; Push 2.0; DoOpn Add; Push 3.0; DoOpn Mult]</tt>
+
+<p>Write a function <tt>evalRPN</tt> of type <tt>sopn list * float list -> float</tt> that evaluates a sequence of stack operations in the context of a given stack and then
+returns the number at the top of the resulting stack.  Don't worry about the possibility of
+stack underflow (but note how the ML typechecker properly warns about this possibility!).
+</li>
+
+<p>
+<li>
+Write a function <tt>toRPN</tt> of type <tt>aexp -> sopn list</tt> that converts
+an arithmetic expression into a sequence of stack operations which represents the same computation.
+There should be a <tt>DoOpn Add</tt> stack operation
+for every <tt>Add</tt> in the input, and so on; evaluating the input expression to a
+number <tt>n</tt> and then returning <tt>[Push n]</tt> will get you no credit.
+<i>Hint: This function corresponds exactly to a postorder traversal of the input expression
+when viewed as a tree.</i>
+</li> </ol>
+</body></html>

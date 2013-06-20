@@ -1,0 +1,87 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+lang="en"><head><title>Homework 3</title>
+</head>
+
+
+<body>
+
+<h1>Homework 3: An Interpreter for Mini-OCaml (MOCaml)</h1>
+
+<h2>Due Friday, April 22, at 11:30pm</h2>
+<h3>Turn in your homework via the course web page as an updated version of the
+<tt>interp.ml</tt> text file that I have provided in the attached zip archive.
+You will not modify any of the other files in that archive.
+
+<h3>Make sure your code can be successfully loaded into the OCaml interpreter;
+if not you get an automatic 0 for the homework!</h3>
+
+<h3>Recall the CS131 Academic Honesty Policy!  You must say whom you
+discussed the assignment with at the top of your assignment, and also what
+other resources you used.</h3>
+
+For this assignment, you will implement an interpreter for a subset of OCaml in OCaml.  This is
+a fun way to get more practice with OCaml and also to really learn what's going on under the
+covers.  You should obey our usual style rules and tips from past homeworks, of course.
+
+
+<p>Now on to the assignment!  First use the <tt>unzip</tt> program to extract the <tt>hw3</tt> directory from the zip archive I've provided (on many platforms, double-clicking on the archive also works).
+<b>Your job is to complete the interpreter by completing the implementation of several functions in  the file <tt>interp.ml</tt>.</b>
+Here is a description of the various files and what you must do:
+<ul>
+  <li><tt>hw3.ml</tt>:  This file simply loads all of the other files in order of dependencies.
+  Therefore, to load your MOCaml interpreter,  type the directive
+  <tt>#use hw3.ml;;</tt> in the OCaml interpreter.  This
+  will load all the files in the right order and start up the MOCaml interpreter. <i>You do not need to understand the code in this file.</i></li><p>
+
+  <li><tt>env.ml</tt>:  This file contains a module <tt>Env</tt> that defines a type <tt>'a env</tt> for environments
+  along with associated operations.  The type <tt>'a env</tt> maps strings (i.e., variable names)
+  to values of type <tt>'a</tt>.  We will use this environment abstraction both for
+  value environments (in the evaluator) and type environments (in the typechecker).
+  <i>Read the comments in the file as well as the "module type" definition, which gives the
+    interface to the environment abstraction, in order to familiarize yourself with the
+    type for environments and the associated operations.</i>
+  </li><p>
+
+  <li><tt>ast.ml</tt>:  This file defines several datatypes to represent the syntax of MOCaml.
+  A MOCaml program is a single expression, which is also a legal OCaml expression.
+  <i>Read this file to familiarize yourself with our representation of MOCaml programs, which
+    you will need to manipulate in your code.</i></li><p>
+  
+<li><tt>lexer.ml</tt> and <tt>parser.ml</tt>: These files contain the
+  lexer and parser for MOCaml, which take a MOCaml expression and
+  produce a corresponding <i>abstract syntax tree</i> represented as
+  a value of type <tt>moexpr</tt> (see <tt>ast.ml</tt>).  The lexer
+  and parser were automatically generated from a high-level
+  description of the MOCaml grammar that I wrote using the
+    <tt>ocamllex</tt> and <tt>ocamlyacc</tt> parser generator tools.  <i>You do not need to look at
+  these files.</i></li><p>
+
+<li><tt>repl.ml</tt>:  This file contains code that implements the MOCaml interpreter (its <i>read-eval-print loop</i> or REPL).  The function <tt>repl()</tt> can be invoked to start
+  the MOCaml interpreter (this function is automatically invoked when you load <tt>hw3.ml</tt> into the OCaml interpreter).  <i>You
+  do not need to look at this file.</i></li></ul>
+
+Finally, <tt>interp.ml</tt> contains an incomplete evaluator and typechecker for MOCaml.  
+Your job is to complete them.  Currently many places raise the <tt>ImplementMe</tt> exception.
+  Specifically:
+
+  <ol>
+    <li> Implement the <tt>eval</tt> function to complete the evaluation of MOCaml expressions.
+    Also complete two helper functions that are used by expressions that perform pattern
+    matching:
+   <tt>patMatchOne</tt> and
+  <tt>patMatch</tt>.  These functions
+  are well commented, so see the file for details.  Test your evaluator on many MOCaml
+    expressions -- we will be doing the same.  The value printed by the MOCaml interpreter for
+    a given expression should be identical to what the
+    OCaml interpreter would print for that expression.</li><p>
+    <li>Implement the <tt>tc</tt> function to complete the typechecking of MOCaml expressions.
+    Also complete the helper function <tt>patMatchType</tt> that is used by expressions that
+    perform pattern matching.  These functions
+  are well commented, so see the file for details.  Test your typechecker on many MOCaml
+    expressions -- we will be doing the same.  The type printed by the MOCaml interpreter for
+    a given expression should be identical to what the
+    OCaml interpreter would print for that expression.</li>
+    </ol>  
+
+</body></html>

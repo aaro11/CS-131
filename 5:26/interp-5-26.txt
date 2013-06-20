@@ -1,0 +1,968 @@
+Macintosh.local:/Users/todd
+Macintosh /Users/todd [1] -> cd cs131/notes/
+Macintosh.local:/Users/todd/cs131/notes
+Macintosh /Users/todd/cs131/notes [2] -> gprolog 
+GNU Prolog 1.3.1
+By Daniel Diaz
+Copyright (C) 1999-2009 Daniel Diaz
+| ?- consult(boat).
+compiling /Users/todd/work/course/cs131/2011/notes/boat.pl for byte code...
+/Users/todd/work/course/cs131/2011/notes/boat.pl compiled, 56 lines read - 4283 bytes written, 11 ms
+
+yes
+| ?- boatPuzzle([west, west, west, west], [east, east, east, east], Actions).
+
+Fatal Error: local stack overflow (size: 8192 Kb, environment variable used: LOCALSZ)
+Macintosh /Users/todd/cs131/notes [3] -> gprolog
+GNU Prolog 1.3.1
+By Daniel Diaz
+Copyright (C) 1999-2009 Daniel Diaz
+| ?- consult(boat).
+compiling /Users/todd/work/course/cs131/2011/notes/boat.pl for byte code...
+/Users/todd/work/course/cs131/2011/notes/boat.pl compiled, 56 lines read - 4284 bytes written, 12 ms
+
+yes
+| ?- consult(boat).
+compiling /Users/todd/work/course/cs131/2011/notes/boat.pl for byte code...
+/Users/todd/work/course/cs131/2011/notes/boat.pl compiled, 54 lines read - 3771 bytes written, 9 ms
+
+yes
+| ?- length(Actions, 7), boatPuzzle([west, west, west, west], [east, east, east, east], Actions).
+
+Actions = [goat,nothing,wolf,goat,cabbage,nothing,goat] ? ;
+
+Actions = [goat,nothing,cabbage,goat,wolf,nothing,goat] ? ;
+
+(1 ms) no
+| ?- length(Actions, 7), boatPuzzle([west, west, west, west], [east, east, east, east], Actions).
+
+Actions = [goat,nothing,wolf,goat,cabbage,nothing,goat] ? 
+
+yes
+| ?- length(Action, 7), boatPuzzle([west, west, west, west], [east, east, east, east], Actions). 
+
+Fatal Error: local stack overflow (size: 8192 Kb, environment variable used: LOCALSZ)
+Macintosh /Users/todd/cs131/notes [4] -> gprolog
+GNU Prolog 1.3.1
+By Daniel Diaz
+Copyright (C) 1999-2009 Daniel Diaz
+| ?- consult(boat).
+compiling /Users/todd/work/course/cs131/2011/notes/boat.pl for byte code...
+/Users/todd/work/course/cs131/2011/notes/boat.pl compiled, 54 lines read - 3771 bytes written, 11 ms
+
+(1 ms) yes
+| ?- length(Actions, 7), boatPuzzle([west, west, west, west], [east, east, east, east], Actions).
+
+Actions = [goat,nothing,wolf,goat,cabbage,nothing,goat] ? ;
+
+Actions = [goat,nothing,cabbage,goat,wolf,nothing,goat] ? ;
+
+(1 ms) no
+| ?- consult(boat).                                                   compiling /Users/todd/work/course/cs131/2011/notes/boat.pl for byte code...
+/Users/todd/work/course/cs131/2011/notes/boat.pl compiled, 59 lines read - 4141 bytes written, 10 ms
+
+(1 ms) yes
+| ?- genNum(10).
+
+true ? ;
+
+Fatal Error: global stack overflow (size: 16385 Kb, environment variable used: GLOBALSZ)
+Macintosh /Users/todd/cs131/notes [5] -> gprolog
+GNU Prolog 1.3.1
+By Daniel Diaz
+Copyright (C) 1999-2009 Daniel Diaz
+| ?- consult(boat).
+compiling /Users/todd/work/course/cs131/2011/notes/boat.pl for byte code...
+/Users/todd/work/course/cs131/2011/notes/boat.pl compiled, 59 lines read - 4141 bytes written, 11 ms
+
+yes
+| ?- genNum(X).
+
+X = 0 ? ;
+uncaught exception: error(instantiation_error,(is)/2)
+| ?- consult(boat).
+compiling /Users/todd/work/course/cs131/2011/notes/boat.pl for byte code...
+/Users/todd/work/course/cs131/2011/notes/boat.pl compiled, 59 lines read - 4160 bytes written, 9 ms
+
+yes
+| ?- genNum(X).    
+
+X = 0 ? ;
+
+X = 1 ? ;
+
+X = 2 ? ;
+
+X = 3 ? ;
+
+X = 4 ? ;
+
+X = 5 ? ;
+
+X = 6 ? ;
+
+X = 7 ? ;
+
+X = 8 ? ;
+
+X = 9 ? ;
+
+X = 10 ? ;
+
+X = 11 ? ;
+
+X = 12 ? ;
+
+X = 13 ? ;
+
+X = 14 ? ;
+
+X = 15 ? ;
+
+X = 16 ? ;
+
+X = 17 ? ;
+
+X = 18 ? ;
+
+X = 19 ? ;
+
+X = 20 ? ;
+
+X = 21 ? ;
+
+X = 22 ? ;
+
+X = 23 ? ;
+
+X = 24 ? ;
+
+X = 25 ? ;
+
+X = 26 ? ;
+
+X = 27 ? 
+
+(3 ms) yes
+| ?- genNum(X).
+
+X = 0 ? ;
+
+X = 1 ? ;
+
+X = 2 ? ;
+
+X = 3 ? ;
+
+X = 4 ? ;
+
+X = 5 ? ;
+
+X = 6 ? ;
+
+X = 7 ? ;
+
+X = 8 ? ;
+
+X = 9 ? ;
+
+X = 10 ? ;
+
+X = 11 ? ;
+
+X = 12 ? ;
+
+X = 13 ? ;
+
+X = 14 ? ;
+
+X = 15 ? ;
+
+X = 16 ? ;
+
+X = 17 ? ;
+
+X = 18 ? ;
+
+X = 19 ? 
+
+(3 ms) yes
+| ?- genNum(L), length(Actions, L), boatPuzzle([west, west, west, west], [east, east, east, east], Actions).
+
+Actions = [goat,nothing,wolf,goat,cabbage,nothing,goat]
+L = 7 ? ;
+
+Actions = [goat,nothing,cabbage,goat,wolf,nothing,goat]
+L = 7 ? ;
+
+Actions = [goat,nothing,nothing,nothing,wolf,goat,cabbage,nothing,goat]
+L = 9 ? ;
+
+Actions = [goat,nothing,nothing,nothing,cabbage,goat,wolf,nothing,goat]
+L = 9 ? ;
+
+Actions = [goat,nothing,wolf,wolf,wolf,goat,cabbage,nothing,goat]
+L = 9 ? ;
+
+Actions = [goat,nothing,wolf,wolf,cabbage,goat,wolf,nothing,goat]
+L = 9 ? ;
+
+Actions = [goat,nothing,wolf,goat,goat,goat,cabbage,nothing,goat]
+L = 9 ? ;
+
+Actions = [goat,nothing,wolf,goat,cabbage,nothing,nothing,nothing,goat]
+L = 9 ? ;
+
+Actions = [goat,nothing,wolf,goat,cabbage,nothing,goat,goat,goat]
+L = 9 ? ;
+
+Actions = [goat,nothing,wolf,goat,cabbage,wolf,wolf,nothing,goat]
+L = 9 ? ;
+
+Actions = [goat,nothing,wolf,goat,cabbage,cabbage,cabbage,nothing,goat]
+L = 9 ? ;
+
+Actions = [goat,nothing,cabbage,goat,wolf,nothing,nothing,nothing,goat]
+L = 9 ? ;
+
+Actions = [goat,nothing,cabbage,goat,wolf,nothing,goat,goat,goat]
+L = 9 ? ;
+
+Actions = [goat,nothing,cabbage,goat,wolf,wolf,wolf,nothing,goat]
+L = 9 ? ;
+
+Actions = [goat,nothing,cabbage,goat,wolf,cabbage,cabbage,nothing,goat]
+L = 9 ? ;
+
+Actions = [goat,nothing,cabbage,goat,goat,goat,wolf,nothing,goat]
+L = 9 ? ;
+
+Actions = [goat,nothing,cabbage,cabbage,wolf,goat,cabbage,nothing,goat]
+L = 9 ? ;
+
+Actions = [goat,nothing,cabbage,cabbage,cabbage,goat,wolf,nothing,goat]
+L = 9 ? ;
+
+Actions = [goat,goat,goat,nothing,wolf,goat,cabbage,nothing,goat]
+L = 9 ? ;
+
+Actions = [goat,goat,goat,nothing,cabbage,goat,wolf,nothing,goat]
+L = 9 ? ;
+
+Actions = [goat,nothing,nothing,nothing,nothing,nothing,wolf,goat,cabbage,nothing,goat]
+L = 11 ? ;
+
+Actions = [goat,nothing,nothing,nothing,nothing,nothing,cabbage,goat,wolf,nothing,goat]
+L = 11 ? ;
+
+Actions = [goat,nothing,nothing,nothing,wolf,wolf,wolf,goat,cabbage,nothing,goat]
+L = 11 ? ;
+
+Actions = [goat,nothing,nothing,nothing,wolf,wolf,cabbage,goat,wolf,nothing,goat]
+L = 11 ? ;
+
+Actions = [goat,nothing,nothing,nothing,wolf,goat,goat,goat,cabbage,nothing,goat]
+L = 11 ? ;
+
+Actions = [goat,nothing,nothing,nothing,wolf,goat,cabbage,nothing,nothing,nothing,goat]
+L = 11 ? ;
+
+Actions = [goat,nothing,nothing,nothing,wolf,goat,cabbage,nothing,goat,goat,goat]
+L = 11 ? ;
+
+Actions = [goat,nothing,nothing,nothing,wolf,goat,cabbage,wolf,wolf,nothing,goat]
+L = 11 ? ;
+
+Actions = [goat,nothing,nothing,nothing,wolf,goat,cabbage,cabbage,cabbage,nothing,goat]
+L = 11 ? ;
+
+Actions = [goat,nothing,nothing,nothing,cabbage,goat,wolf,nothing,nothing,nothing,goat]
+L = 11 ? ;
+
+Actions = [goat,nothing,nothing,nothing,cabbage,goat,wolf,nothing,goat,goat,goat]
+L = 11 ? ;
+
+Actions = [goat,nothing,nothing,nothing,cabbage,goat,wolf,wolf,wolf,nothing,goat]
+L = 11 ? ;
+
+Actions = [goat,nothing,nothing,nothing,cabbage,goat,wolf,cabbage,cabbage,nothing,goat]
+L = 11 ? ;
+
+Actions = [goat,nothing,nothing,nothing,cabbage,goat,goat,goat,wolf,nothing,goat]
+L = 11 ? ;
+
+Actions = [goat,nothing,nothing,nothing,cabbage,cabbage,wolf,goat,cabbage,nothing,goat]
+L = 11 ? ;
+
+Actions = [goat,nothing,nothing,nothing,cabbage,cabbage,cabbage,goat,wolf,nothing,goat]
+L = 11 ? ;
+
+Actions = [goat,nothing,nothing,goat,goat,nothing,wolf,goat,cabbage,nothing,goat]
+L = 11 ? 
+
+(20 ms) yes
+| ?- genNum(L), L =< 5, length(Actions, L), boatPuzzle([west, west, west, west], [east, east, east, east], Actions).
+^C
+Prolog interruption (h for help) ? a
+execution aborted
+| ?- consult(boat).                                                   compiling /Users/todd/work/course/cs131/2011/notes/boat.pl for byte code...
+/Users/todd/work/course/cs131/2011/notes/boat.pl compiled, 59 lines read - 4312 bytes written, 11 ms
+
+(1 ms) yes
+| ?- consult(boat).
+compiling /Users/todd/work/course/cs131/2011/notes/boat.pl for byte code...
+/Users/todd/work/course/cs131/2011/notes/boat.pl:57: warning: singleton variables [C] for genNum/2
+/Users/todd/work/course/cs131/2011/notes/boat.pl compiled, 59 lines read - 4291 bytes written, 11 ms
+
+(1 ms) yes
+| ?- genNum(N, 15).
+
+N = 0 ? ;
+
+N = 1 ? ;
+
+N = 2 ? ;
+
+N = 3 ? ;
+
+N = 4 ? ;
+
+N = 5 ? ;
+
+N = 6 ? ;
+
+N = 7 ? ;
+
+N = 8 ? ;
+
+N = 9 ? ;
+
+N = 10 ? ;
+
+N = 11 ? ;
+
+N = 12 ? ;
+
+N = 13 ? ;
+
+N = 14 ? ;
+
+N = 15 ? ;
+
+Fatal Error: local stack overflow (size: 8192 Kb, environment variable used: LOCALSZ)
+Macintosh /Users/todd/cs131/notes [6] -> gprolog
+GNU Prolog 1.3.1
+By Daniel Diaz
+Copyright (C) 1999-2009 Daniel Diaz
+| ?- consult(boat).
+compiling /Users/todd/work/course/cs131/2011/notes/boat.pl for byte code...
+/Users/todd/work/course/cs131/2011/notes/boat.pl:57: warning: singleton variables [C] for genNum/2
+/Users/todd/work/course/cs131/2011/notes/boat.pl compiled, 59 lines read - 4291 bytes written, 12 ms
+
+yes
+| ?- genNum(X, 4).
+
+X = 0 ? ;
+uncaught exception: error(instantiation_error,(<)/2)
+| ?- consult(boat).
+compiling /Users/todd/work/course/cs131/2011/notes/boat.pl for byte code...
+/Users/todd/work/course/cs131/2011/notes/boat.pl:57: warning: singleton variables [C] for genNum/2
+/Users/todd/work/course/cs131/2011/notes/boat.pl compiled, 66 lines read - 4727 bytes written, 9 ms
+
+yes
+| ?- upTo(10, X).
+
+X = 0 ? ;
+
+Fatal Error: global stack overflow (size: 16385 Kb, environment variable used: GLOBALSZ)
+Macintosh /Users/todd/cs131/notes [7] -> gprolog
+GNU Prolog 1.3.1
+By Daniel Diaz
+Copyright (C) 1999-2009 Daniel Diaz
+| ?- consult(boat).
+compiling /Users/todd/work/course/cs131/2011/notes/boat.pl for byte code...
+/Users/todd/work/course/cs131/2011/notes/boat.pl:57: warning: singleton variables [C] for genNum/2
+/Users/todd/work/course/cs131/2011/notes/boat.pl:64: warning: singleton variables [N] for upTo/2
+/Users/todd/work/course/cs131/2011/notes/boat.pl compiled, 66 lines read - 4706 bytes written, 11 ms
+
+yes
+| ?- upTo(4, X).   
+
+X = 0 ? ;
+
+X = 0 ? ;
+
+X = 0 ? ;
+
+X = 0 ? ;
+
+X = 0 ? ;
+
+X = 0 ? ;
+
+X = 0 ? ;
+
+X = 0 ? ;
+
+X = 0 ? ;
+
+X = 0 ? ;
+
+X = 0 ? ;
+
+X = 0 ? 
+
+(1 ms) yes
+| ?- append(X, [2,3], [1,2,3]).
+
+X = [1] ? ;
+
+no
+| ?- findall([X], append(X, [2,3], [1,2,3])).
+uncaught exception: error(existence_error(procedure,findall/2),top_level/0)
+| ?- findall(X, append(X, [2,3], [1,2,3]), L).
+
+L = [[1]]
+
+(1 ms) yes
+| ?- findall(X, append(X, Y, [1,2,3]), L).    
+
+L = [[],[1],[1,2],[1,2,3]]
+
+yes
+| ?- findall([X,Y], append(X, Y, [1,2,3]), L).
+
+L = [[[],[1,2,3]],[[1],[2,3]],[[1,2],[3]],[[1,2,3],[]]]
+
+yes
+| ?- findall(X, append(X, Y, Z), L).          
+uncaught exception: error(representation_error(too_many_variables),findall/3)
+| ?- 3 =:= 3.
+
+yes
+| ?- X =:= 3.
+uncaught exception: error(instantiation_error,(=:=)/2)
+| ?- X = 3.  
+
+X = 3
+
+yes
+| ?- abs(2, X).
+uncaught exception: error(existence_error(procedure,abs/2),top_level/0)
+| ?- -1 * -1.
+uncaught exception: error(existence_error(procedure,(*)/2),top_level/0)
+| ?- *(-1, -1).
+uncaught exception: error(existence_error(procedure,(*)/2),top_level/0)
+| ?- X is -1 * 4.
+
+X = -4
+
+yes
+| ?- consult(notes-5-26).
+uncaught exception: error(type_error(list,notes-5-26),consult/1)
+| ?- consult(notes-5-26).
+uncaught exception: error(type_error(list,notes-5-26),consult/1)
+| ?- consult(notes-5-26).
+uncaught exception: error(type_error(list,notes-5-26),consult/1)
+| ?- consult(notes-5-26).
+uncaught exception: error(type_error(list,notes-5-26),consult/1)
+| ?- consult(notes-5-26).
+uncaught exception: error(type_error(list,notes-5-26),consult/1)
+| ?- consult(boat).      
+compiling /Users/todd/work/course/cs131/2011/notes/boat.pl for byte code...
+/Users/todd/work/course/cs131/2011/notes/boat.pl:64: warning: singleton variables [N] for upTo/2
+/Users/todd/work/course/cs131/2011/notes/boat.pl compiled, 66 lines read - 4576 bytes written, 9 ms
+
+yes
+| ?- consult(nqueens).
+compiling /Users/todd/work/course/cs131/2011/notes/nqueens.pl for byte code...
+/Users/todd/work/course/cs131/2011/notes/nqueens.pl compiled, 12 lines read - 150 bytes written, 10 ms
+
+yes
+| ?- consult(nqueens).
+compiling /Users/todd/work/course/cs131/2011/notes/nqueens.pl for byte code...
+/Users/todd/work/course/cs131/2011/notes/nqueens.pl:10: warning: singleton variables [X1,X2] for attacks/2
+/Users/todd/work/course/cs131/2011/notes/nqueens.pl compiled, 12 lines read - 496 bytes written, 10 ms
+
+(1 ms) yes
+| ?- consult(nqueens).
+compiling /Users/todd/work/course/cs131/2011/notes/nqueens.pl for byte code...
+/Users/todd/work/course/cs131/2011/notes/nqueens.pl:8: warning: singleton variables [Y1,Y2] for attacks/2
+/Users/todd/work/course/cs131/2011/notes/nqueens.pl:10: warning: singleton variables [X1,X2] for attacks/2
+/Users/todd/work/course/cs131/2011/notes/nqueens.pl compiled, 12 lines read - 724 bytes written, 12 ms
+
+yes
+| ?- consult(nqueens).
+compiling /Users/todd/work/course/cs131/2011/notes/nqueens.pl for byte code...
+/Users/todd/work/course/cs131/2011/notes/nqueens.pl:8: warning: singleton variables [Y1,Y2] for attacks/2
+/Users/todd/work/course/cs131/2011/notes/nqueens.pl:10: warning: singleton variables [X1,X2] for attacks/2
+/Users/todd/work/course/cs131/2011/notes/nqueens.pl compiled, 12 lines read - 1213 bytes written, 10 ms
+
+(1 ms) yes
+| ?- abs(3, X).
+
+X = 3 ? ;
+
+no
+| ?- abs(-3, X).
+
+X = 3
+
+yes
+| ?- consult(nqueens).
+compiling /Users/todd/work/course/cs131/2011/notes/nqueens.pl for byte code...
+/Users/todd/work/course/cs131/2011/notes/nqueens.pl:8: warning: singleton variables [Y1,Y2] for attacks/2
+/Users/todd/work/course/cs131/2011/notes/nqueens.pl:10: warning: singleton variables [X1,X2] for attacks/2
+/Users/todd/work/course/cs131/2011/notes/nqueens.pl compiled, 17 lines read - 1982 bytes written, 8 ms
+
+(1 ms) yes
+| ?- consult(nqueens).
+compiling /Users/todd/work/course/cs131/2011/notes/nqueens.pl for byte code...
+/Users/todd/work/course/cs131/2011/notes/nqueens.pl compiled, 17 lines read - 1982 bytes written, 10 ms
+
+yes
+| ?- attacks(queens(8, 3), queens(8, 6)).
+
+no
+| ?- attacks(queen(8, 3), queen(8, 6)).  
+
+true ? ;
+
+(1 ms) no
+| ?- attacks(queen(8, 3), queen(7, 6)).
+
+no
+| ?- attacks(queen(8, 3), queen(7, 4)).
+
+true ? ;
+
+no
+| ?- attacks(queen(8, 3), queen(7, 2)).
+
+true ? ;
+
+(1 ms) no
+| ?- consult(nqueens).                   
+compiling /Users/todd/work/course/cs131/2011/notes/nqueens.pl for byte code...
+/Users/todd/work/course/cs131/2011/notes/nqueens.pl:25: warning: singleton variables [X,Y] for nqueens/1
+/Users/todd/work/course/cs131/2011/notes/nqueens.pl compiled, 27 lines read - 3052 bytes written, 9 ms
+
+yes
+| ?- nqueens([]).
+
+yes
+| ?- nqueens([Q]).
+
+Q = queen(_,_) ? ;
+
+true ? ;
+
+no
+| ?- nqueens([Q1, Q2]).
+uncaught exception: error(instantiation_error,(=:=)/2)
+| ?- member(X, [1,2,3,4,5,6,7,8]).
+
+X = 1 ? ;
+
+X = 2 ? ;
+
+X = 3 ? ;
+
+X = 4 ? ;
+
+X = 5 ? ;
+
+X = 6 ? ;
+
+X = 7 ? ;
+
+X = 8 ? ;
+
+(1 ms) no
+| ?- consult(nqueens).            
+compiling /Users/todd/work/course/cs131/2011/notes/nqueens.pl for byte code...
+/Users/todd/work/course/cs131/2011/notes/nqueens.pl compiled, 28 lines read - 4013 bytes written, 9 ms
+
+(1 ms) yes
+| ?- nqueens([X]).
+
+X = queen(1,1) ? ;
+
+X = queen(1,2) ? ;
+
+X = queen(1,3) ? ;
+
+X = queen(1,4) ? ;
+
+X = queen(1,5) ? ;
+
+X = queen(1,6) ? ;
+
+X = queen(1,7) ? ;
+
+X = queen(1,8) ? ;
+
+X = queen(2,1) ? ;
+
+X = queen(2,2) ? ;
+
+X = queen(2,3) ? ;
+
+X = queen(2,4) ? ;
+
+X = queen(2,5) ? ;
+
+X = queen(2,6) ? ;
+
+X = queen(2,7) ? ;
+
+X = queen(2,8) ? ;
+
+X = queen(3,1) ? ;
+
+X = queen(3,2) ? ;
+
+X = queen(3,3) ? ;
+
+X = queen(3,4) ? ;
+
+X = queen(3,5) ? ;
+
+X = queen(3,6) ? ;
+
+X = queen(3,7) ? ;
+
+X = queen(3,8) ? ;
+
+X = queen(4,1) ? ;
+
+X = queen(4,2) ? ;
+
+X = queen(4,3) ? ;
+
+X = queen(4,4) ? ;
+
+X = queen(4,5) ? ;
+
+X = queen(4,6) ? ;
+
+X = queen(4,7) ? ;
+
+X = queen(4,8) ? ;
+
+X = queen(5,1) ? ;
+
+X = queen(5,2) ? ;
+
+X = queen(5,3) ? ;
+
+X = queen(5,4) ? ;
+
+X = queen(5,5) ? ;
+
+X = queen(5,6) ? ;
+
+X = queen(5,7) ? ;
+
+X = queen(5,8) ? ;
+
+X = queen(6,1) ? ;
+
+X = queen(6,2) ? ;
+
+X = queen(6,3) ? ;
+
+X = queen(6,4) ? ;
+
+X = queen(6,5) ? ;
+
+X = queen(6,6) ? 
+
+(6 ms) yes
+| ?- nqueens([X, Y]).
+
+X = queen(1,1)
+Y = queen(2,3) ? ;
+
+X = queen(1,1)
+Y = queen(2,4) ? ;
+
+X = queen(1,1)
+Y = queen(2,5) ? ;
+
+X = queen(1,1)
+Y = queen(2,6) ? ;
+
+X = queen(1,1)
+Y = queen(2,7) ? ;
+
+X = queen(1,1)
+Y = queen(2,8) ? ;
+
+X = queen(1,1)
+Y = queen(3,2) ? ;
+
+X = queen(1,1)
+Y = queen(3,4) ? ;
+
+X = queen(1,1)
+Y = queen(3,5) ? 
+
+(1 ms) yes
+| ?- nqueens([Q1, Q2, Q3, Q4, Q5, Q6, Q7, Q8, Q9]).
+^C
+Prolog interruption (h for help) ? a
+execution aborted
+| ?- nqueens([Q1, Q2, Q3, Q4, Q5, Q6, Q7, Q8]).    
+^C
+Prolog interruption (h for help) ? 
+   a  abort        b  break
+   c  continue     e  exit
+   d  debug        t  trace
+  h/? help
+
+Prolog interruption (h for help) ? a
+execution aborted
+| ?- nqueens([Q1, Q2, Q3, Q4]).                
+
+Q1 = queen(1,1)
+Q2 = queen(2,3)
+Q3 = queen(3,5)
+Q4 = queen(4,2) ? ;
+
+Q1 = queen(1,1)
+Q2 = queen(2,3)
+Q3 = queen(3,5)
+Q4 = queen(4,7) ? 
+
+(180 nqueens([queen(1,Y1), queen(2,Y2), queen(3,, Q4, Q5, Q6, Q7, Q8]). ?- nqueens([queen(1,Y1), queen(2,Y2), queen(,, Q4, Q5, Q6, Q7, Q8]).
+uncaught exception: error(syntax_error('user_input:46 (char:46) expression expected'),read_term/3)
+| ?- nqueens([queen(1,Y1),queen(2,Y2),queen(3,Y3),queen(4,Y4),queen(5,Y5),queen(6,Y6),queen(7,Y7),queen(8,Y8)]).
+
+Y1 = 1
+Y2 = 5
+Y3 = 8
+Y4 = 6
+Y5 = 3
+Y6 = 7
+Y7 = 2
+Y8 = 4 ? 
+
+(7816 ms) yes
+| ?- nqueens([queen(1,Y1),queen(2,Y2),queen(3,Y3),queen(4,Y4),queen(5,Y5),queen(6,Y6),queen(7,Y7),queen(8,Y8)]).
+
+Y1 = 1
+Y2 = 5
+Y3 = 8
+Y4 = 6
+Y5 = 3
+Y6 = 7
+Y7 = 2
+Y8 = 4 ? ;
+
+Y1 = 1
+Y2 = 6
+Y3 = 8
+Y4 = 3
+Y5 = 7
+Y6 = 4
+Y7 = 2
+Y8 = 5 ? ;
+
+Y1 = 1
+Y2 = 7
+Y3 = 4
+Y4 = 6
+Y5 = 8
+Y6 = 2
+Y7 = 5
+Y8 = 3 ? ;
+
+Y1 = 1
+Y2 = 7
+Y3 = 5
+Y4 = 8
+Y5 = 2
+Y6 = 4
+Y7 = 6
+Y8 = 3 ? ;
+^C
+Prolog interruption (h for help) ? ;
+   a  abort        b  break
+   c  continue     e  exit
+   d  debug        t  trace
+  h/? help
+
+Prolog interruption (h for help) ? a
+execution aborted
+| ?- findall(Y1, nqueens([queen(1,Y1),queen(2,Y2),queen(3,Y3),queen(4,Y4),queen(5,Y5),queen(6,Y6),queen(7,Y7),queen(8,Y8)]), L).
+
+L = [1,1,1,1,2,2,2,2,2,2,2,2,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,7,7,7,7,7,7,7,7,8,8,8,8]
+
+(100018 ms) yes
+| ?- setof(Y1, nqueens([queen(1,Y1),queen(2,Y2),queen(3,Y3),queen(4,Y4),queen(5,Y5),queen(6,Y6),queen(7,Y7),queen(8,Y8)]), L).  
+
+L = [7]
+Y2 = 1
+Y3 = 3
+Y4 = 8
+Y5 = 6
+Y6 = 4
+Y7 = 2
+Y8 = 5 ? 
+Action (; for next solution, a for all solutions, RET to stop) ? 
+Action (; for next solution, a for all solutions, RET to stop) ? 
+Action (; for next solution, a for all solutions, RET to stop) ? 
+
+(99809 ms) yes
+| ?- permuation([1,2,3], X).
+uncaught exception: error(existence_error(procedure,permuation/2),top_level/0)
+| ?- permutation([1,2,3], X).
+
+X = [1,2,3] ? ;
+
+X = [1,3,2] ? ;
+
+X = [2,1,3] ? ;
+
+X = [2,3,1] ? ;
+
+X = [3,1,2] ? ;
+
+X = [3,2,1] ? ;
+
+(1 ms) no
+| ?- consult(tsp).                                                    compiling /Users/todd/work/course/cs131/2011/notes/tsp.pl for byte code...
+/Users/todd/work/course/cs131/2011/notes/tsp.pl compiled, 25 lines read - 2707 bytes written, 8 ms
+
+(1 ms) yes
+| ?- tsp([losAngeles,sanFrancisco,sanDiego,seattle], Tour, Length).
+
+Length = 3290
+Tour = [losAngeles,sanFrancisco,sanDiego,seattle,losAngeles] ? ;
+
+Length = 2590
+Tour = [losAngeles,sanFrancisco,seattle,sanDiego,losAngeles] ? ;
+
+Length = 2580
+Tour = [losAngeles,sanDiego,sanFrancisco,seattle,losAngeles] ? ;
+
+Length = 2590
+Tour = [losAngeles,sanDiego,seattle,sanFrancisco,losAngeles] ? ;
+
+Length = 2580
+Tour = [losAngeles,seattle,sanFrancisco,sanDiego,losAngeles] ? ;
+
+Length = 3290
+Tour = [losAngeles,seattle,sanDiego,sanFrancisco,losAngeles] ? ;
+
+Length = 2590
+Tour = [sanFrancisco,losAngeles,sanDiego,seattle,sanFrancisco] ? ;
+
+Length = 3290
+Tour = [sanFrancisco,losAngeles,seattle,sanDiego,sanFrancisco] ? ;
+
+Length = 2580
+Tour = [sanFrancisco,sanDiego,losAngeles,seattle,sanFrancisco] ? 
+
+(1 ms) yes
+| ?- consult(boat).
+compiling /Users/todd/work/course/cs131/2011/notes/boat.pl for byte code...
+/Users/todd/work/course/cs131/2011/notes/boat.pl:64: warning: singleton variables [N] for upTo/2
+/Users/todd/work/course/cs131/2011/notes/boat.pl compiled, 66 lines read - 4575 bytes written, 9 ms
+
+(1 ms) yes
+| ?- genNum(X).
+
+X = 0 ? ;
+
+X = 1 ? ;
+
+X = 2 ? ;
+
+X = 3 ? ;
+
+X = 4 ? ;
+
+X = 5 ? ;
+
+X = 6 ? ;
+
+X = 7 ? ;
+
+X = 8 ? ;
+
+X = 9 ? ;
+
+X = 10 ? ;
+
+X = 11 ? 
+
+(2 ms) yeum(Length), tsp([losAngeles,sanFrancisco,sanDiego,seattle], Tour, Length).losAngeles,sanFrancisco,sanDiego,seattle], Tour, Length).
+
+Length = 2580
+Tour = [losAngeles,sanDiego,sanFrancisco,seattle,losAngeles] ? 
+
+(515 ms) yes
+| ?- genNum(Length), tsp([losAngeles,sanFrancisco,sanDiego,seattle], [losAngeles|Tour], Length).
+
+Length = 2580
+Tour = [sanDiego,sanFrancisco,seattle,losAngeles] ? 
+
+(355 ms) yes
+| ?- genNum(Length), tsp([losAngeles,sanFrancisco,sanDiego,seattle], [losAngeles|Tour], Length).
+
+Length = 2580
+Tour = [sanDiego,sanFrancisco,seattle,losAngeles] ? ;
+
+Length = 2580
+Tour = [seattle,sanFrancisco,sanDiego,losAngeles] ? ;
+
+Length = 2590
+Tour = [sanFrancisco,seattle,sanDiego,losAngeles] ? ;
+
+Length = 2590
+Tour = [sanDiego,seattle,sanFrancisco,losAngeles] ? ;
+
+Length = 3290
+Tour = [sanFrancisco,sanDiego,seattle,losAngeles] ? ;
+
+Length = 3290
+Tour = [seattle,sanDiego,sanFrancisco,losAngeles] ? ;
+^C
+Prolog interruption (h for help) ? ;
+   a  abort        b  break
+   c  continue     e  exit
+   d  debug        t  trace
+  h/? help
+
+Prolog interruption (h for help) ? 
+   a  abort        b  break
+   c  continue     e  exit
+   d  debug        t  trace
+  h/? help
+
+Prolog interruption (h for help) ? a
+execution aborted
+| ?- findall(Tour, tsp([losAngeles,sanFrancisco,sanDiego,seattle], [losAngeles|Tour], Length), L).
+
+L = [[sanFrancisco,sanDiego,seattle,losAngeles],[sanFrancisco,seattle,sanDiego,losAngeles],[sanDiego,sanFrancisco,seattle,losAngeles],[sanDiego,seattle,sanFrancisco,losAngeles],[seattle,sanFrancisco,sanDiego,losAngeles],[seattle,sanDiego,sanFrancisco,losAngeles]]
+
+yes
+| ?- findall([Tour,Length], tsp([losAngeles,sanFrancisco,sanDiego,seattle], [losAngeles|Tour], Length), L).
+
+L = [[[sanFrancisco,sanDiego,seattle,losAngeles],3290],[[sanFrancisco,seattle,sanDiego,losAngeles],2590],[[sanDiego,sanFrancisco,seattle,losAngeles],2580],[[sanDiego,seattle,sanFrancisco,losAngeles],2590],[[seattle,sanFrancisco,sanDiego,losAngeles],2580],[[seattle,sanDiego,sanFrancisco,losAngeles],3290]]
+
+yes
+| ?- consult(interp).                                                 compiling /Users/todd/work/course/cs131/2011/notes/interp.pl for byte code...
+/Users/todd/work/course/cs131/2011/notes/interp.pl compiled, 6 lines read - 822 bytes written, 8 ms
+
+(1 ms) yes
+| ?- eval(plus(plus(const(3), const(4)), const(5)), C).
+
+C = 12
+
+yes
+| ?- 
+
+Macintosh /Users/todd/cs131/notes [8] -> 

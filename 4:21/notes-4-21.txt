@@ -1,0 +1,99 @@
+
+Parametric Polymorphism
+================
+
+let rec length (lst:'a list) =
+  match lst with
+    [] -> 0
+  | x::xs -> 1 + (length xs)
+
+
+how to typecheck (length [1;2;3])?
+ - gets the type of length
+   - 'a list -> int
+ - gets the type of [1;2;3]
+   - int list
+ - can I find an instantation of 'a that makes 'a list equal to int
+ list?
+   - 'a = int
+  
+
+'a is a *type variable*
+- can be *instantiated* with any type
+- this instantiation happens at compile time
+
+key point about parametric polymorphism:
+ - one piece of code
+ - can be used safely with arguments of several different types
+
+ 
+Contrast parametric polymorphism with static overloading:
+
+key point about overloading:
+- a separate piece of code (function) per type
+- the type of actual arguments to determine which piece of code to
+execute
+  - the typechecker does this at compile time
+- overloading a syntactic convenience
+  - could just give each function a separate name
+
+=============
+
+Recursion vs. Iteration
+
+let rec fact n =
+  match n with
+    0 -> 1
+  | _ -> n * (fact(n-1))
+
+
+    (fact 3)
+[(n,3)]
+    n * (fact(n-1))
+     [(n,2),(n,3)]
+          n * (fact(n-1))
+	  [(n,1),(n,2),(n,3)]
+	        n * (fact(n-1))
+		[(n,0),(n,1),(n,2),(n,3)]
+		       1
+
+We create a *tail recursive* version of factorial.
+- a *tail call* is a function call that is the last operation done in
+   a function body
+- a function is tail recursive if all recursive calls are tail calls
+
+let rec trFact n acc =
+  match n with
+     0 -> acc
+   | _ -> trFact (n-1) (n * acc)
+
+[naive]   
+trFact 3 1			[(n,3),(acc,1)]
+  trFact 2 3		[(n,2),(acc,3),(n,3),(acc,1)]
+    trFact 1 6		[(n,1),(acc,6),(n,2),(acc,3),(n,3),(acc,1)]
+      trFact 0 6		[(n,0),(acc,6),(n,1),(acc,6),(n,2),(acc,3),(n,3),(acc,1)]
+         6
+
+OCaml will implement a tail-call optimization for tail-recursive
+functions.
+ - reuse the space for n and acc on each recursive call
+ - jump directly from the base-case result back to the original caller
+
+[with tail-call optimization]   
+trFact 3 1			[(n,3),(acc,1)]
+  trFact 2 3		[(n,2),(acc,3)]
+    trFact 1 6		[(n,1),(acc,6)]
+      trFact 0 6		[(n,0),(acc,6)]
+         6
+Now only using constant space.
+	 
+Not everything can be made tail recursive:
+
+type bintree = Leaf | Node of bintree * int * bintree
+
+let rec size t =
+  match t with
+     Leaf -> 0
+   | Node(l,n,r) -> size(l) + 1 + size(r)
+   
+You can make one of the recursive calls a tail call, but not both.

@@ -1,0 +1,58 @@
+
+Static typechecking (type inference)
+-------------------------------
+
+* determine the type of each expression at compile time (before
+  executing it)
+
+  example: sumList: int list -> int
+   - when given any argument of type int list, it will give you back
+  an integer
+   - no type errors during execution
+      - treating a value of one type as if it is another type
+        - add an integer to a string, etc.
+
+other benefits of static typechecking:
+
+  - checked program documentation
+
+  - enforce user-defined abstractions
+
+  - efficient implementation
+    - special representations for each type
+    
+polymorphic types:
+ - find an instantiation of each type variable ('a) with some type in
+ order to allow the expression to typecheck
+  - instantiation happens at compile time
+
+------------------------
+
+What patterns have we seen so far?
+
+p ::= c | _ | p1::p2 | [p1;...;pn] | (p1,...,pn) | x
+
+where c is a constant value (boolean, int, float, etc.)
+and x is a variable
+
+Syntax:
+
+match e with
+  p1 -> e1
+  ...
+| pn -> en
+
+
+let p=e1 in e2
+
+let x1 = e1 in
+(let x2 = e2 in
+  e3)
+  
+let x = e in
+  match x with
+     ...
+	
+syntax of type decls:
+
+type name = C1 of t1 | ... | Cn of tn

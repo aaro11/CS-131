@@ -1,0 +1,278 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+lang="en"><head><title>Homework 4</title>
+</head>
+
+
+<body>
+
+<h1>Homework 4: Random Art</h1>
+
+<h2>Due Friday, April 29, at 11:30pm</h2>
+
+<h3>Make sure your code can be successfully loaded into the OCaml interpreter;
+if not you get an automatic 0 for the homework!</h3>
+
+<h3>Recall the CS131 Academic Honesty Policy!  You must say whom you
+discussed the assignment with at the top of your assignment, and also what
+other resources you used.</h3>
+
+You should obey our usual style rules and tips from past homeworks, of course.
+
+<p>This homework brings together a number of topics we have studied,
+including user-defined types, higher-order functions, structures
+(modules), and signatures (module types).  Your job is to write an ML
+program to construct psychedelic pictures like the following
+two examples.  <p>
+
+<img src="http://www.cs.ucla.edu/~todd/tmp/sample.jpg">
+<img src="http://www.cs.ucla.edu/~todd/tmp/sample2.jpg">
+
+<p>
+To create these pictures, you will implement a module meeting
+the signature <tt>EXPR</tt> shown in <tt>expr.ml</tt>.  The signature
+provides a type <tt>expr</tt>, which represents expressions that produce a pixel value for a given x-y coordinate.  By randomly constructing values of type <tt>expr</tt>,
+we will in effect be creating
+random functions to apply to a grid of pixels, which will
+result in interesting artwork.
+
+<p>A value of type <tt>expr</tt> represents a mathematical expression
+over the two variables <tt>x</tt> and <tt>y</tt>.  The value
+<tt>buildX</tt> represents the expression <tt>x</tt>, and similarly
+for <tt>buildY</tt>.  The <tt>buildSin</tt> function produces an
+expression that takes the sine of the product of &pi with the argument
+expression's value, and similarly for <tt>buildCos</tt>;
+<tt>buildAvg(e1, e2)</tt> produces an expression that takes the
+arithmetic mean of the two argument expressions' values;
+<tt>buildTimes(e1, e2)</tt> produces an expression that takes the product
+of the two expressions' values.
+<!-- Note that any expression in this -->
+<!-- language produces a value between -1 and 1 whenever <tt>x</tt> and -->
+<!-- <tt>y</tt> are both in that range. -->
+The <tt>EXPR</tt>
+signature also includes functions to print an expression as a string
+and to evaluate an expression given an x-y coordinate.
+
+<ol>
+<li><b>Expression Evaluation:</b> The file <tt>dexpr.ml</tt>
+  provides a module <tt>Expr</tt> that meets the <tt>EXPR</tt> signature.  It
+  defines the type <tt>expr</tt> to be a recursive datatype.
+  However, expression evaluation is totally broken.  Implement the function
+<tt>eval</tt> in <tt>Expr</tt>, of type
+<tt>expr -> float*float -> float</tt>, to evaluate the given expression at the
+given (x,y) location.
+You should use the OCaml functions <tt>sin</tt> and
+<tt>cos</tt>, as well as the floating-point value
+<tt>pi</tt> that I've defined in the module.  Recall that an
+expression tree like <tt>Sine(VarX)</tt> corresponds to the
+mathematical expression <tt>sin(&pi x)</tt>, and the <tt>eval</tt>
+function must be defined
+appropriately.
+
+  <p>Test this function on a few sample inputs before
+moving on to the next part, including the <tt>sampleExpr</tt> value
+provided in <tt>Expr</tt>. You can load all the relevant files into the OCaml interpreter by the directive <tt>#use hw4.ml</tt>.  Use this directive everywhere in the rest of the assignment as well to load your code for testing.  Here are a few sample runs:<p>
+<tt> # Expr.eval
+(Expr.buildSin(Expr.buildAvg(Expr.buildX,Expr.buildY))) (0.5,0.0);; <br>
+- : float = 0.707106781186547462 <br> 
+# Expr.eval Expr.sampleExpr (0.1,0.1);; <br> - : float = 0.569335014033423459
+  </tt></li><p>
+
+If you're getting sick of writing <tt>Expr.</tt> before the name of
+each function, you can type <tt> open Expr;</tt> in the ML interpreter to
+make all of the names declared in <tt>Expr</tt> available
+at the top level.  So now you can just refer to <tt>eval</tt> directly, instead
+of having to say <tt>Expr.eval</tt>.  However, <i>be careful</i>:  If you modify
+<tt>dexpr.ml</tt> and reload it into the interpreter, you have
+to <tt>open Expr;</tt> again.  Otherwise, you'll still be referring to the
+<i>old</i> versions of things at the top level.  Of course, the new versions
+will be available as <tt>Expr.eval</tt>, etc.</li><p>
+
+<li><b>Creating Images:</b> 
+The file <tt>art.ml</tt> defines a module named <tt>Art</tt>, which
+  provides the functionality for creating pictures.
+  It includes the <tt>emitGrayscale</tt> and
+<tt>emitColor</tt> 
+functions, which generate grayscale and color bitmaps
+respectively. These functions want to loop over all the coordinates in a
+grid of a user-specified size, producing a pixel value for each one.
+In a language like C, we'd naturally use a <tt>for</tt> loop for this purpose.
+Luckily, we can simulate <tt>for</tt>
+loops with higher-order functions!
+
+<p>
+In <tt>art.ml</tt>, complete the definition of the
+function <tt>forLoop</tt>, of type <tt>int * int * (int -> unit) ->
+unit</tt>.  (The type of your version may be more general than this
+type, including a type variable in place of a particular type.  That
+is fine.)
+The argument triple
+contains a lower bound, an upper bound, and a function; your code
+should apply the given function to all integers from the lower bound
+to the upper bound, inclusive. In this way, the function is acting like the body of
+the "loop".  If the upper bound is strictly less
+than the lower bound, the call to <tt>forLoop</tt> should do nothing.
+
+<p>Notice that the return type of the given function is <tt>unit</tt>.  This
+  indicates that the function is used only for its <i>side effects</i>.  In this
+  case, the side effect will be writing pixel values to a file.  It may
+be useful to know about OCaml's expression of the form <tt>e1;e2</tt>,
+which executes <tt>e1</tt>, ignores its result, and then executes
+<tt>e2</tt>.   This kind of expression is <i>syntactic sugar</i> for
+the expression <tt>let _ = e1 in e2</tt>.  
+
+<p>Test your code with a call like
+<tt>Art.forLoop(2, 5, (function x -> print_endline (string_of_int x)))</tt>,
+which should print out the numbers 2, 3, 4, and 5.
+Now produce a grayscale
+picture of the expression <tt>sampleExpr</tt>. You can do this by the
+invocation 
+<tt>Art.emitGrayscale(Expr.eval Expr.sampleExpr, 150, "sample")</tt>.
+Notice how currying is used to partially invoke your <tt>eval</tt>
+function, in order to effectively turn
+<tt>sampleExpr</tt> into a function.  This function is then applied to
+each (x,y) coordinate (appropriately scaled to the range [-1,1] in
+each dimension)
+in a square of the specified size, and the resulting image file is named
+"sample.pgm".  
+<!-- If you get an uncaught exception <tt>Chr</tt> while producing an -->
+<!-- image, -->
+<!-- that is an indication that your <tt>eval</tt> function is returning a -->
+<!-- number outside the range [-1,1], which should never happen on a correct -->
+<!-- implementation. -->
+</li><p>
+
+<li> <b>Viewing Images</b>: Some image viewing applications can
+directly display <tt>pgm</tt> and <tt>ppm</tt> files, including the
+<tt>xv</tt> program which is installed on the SEAS Unix machines.
+However, many image-viewing applications require that the image first
+be converted to a JPEG.  This can be done with the <tt>ppmtojpeg</tt>
+program at the command line as follows: <tt>ppmtojpeg input-file.ppm >
+output-file.jpg</tt>.  Despite the name of this program, it will work
+for both .ppm and .pgm files.  This program comes with many Linux
+distributions as well as with Cygwin for Windows; it is also installed on the
+SEAS Unix machines.  If you don't
+already have it, you can download <tt>ppmtojpeg</tt> as part of the
+Netpbm package.  See the "Pre-Built Distributions" section of the <a
+ href="http://netpbm.sourceforge.net">Netpbm home page</a> to install
+it for your platform.  If you use a Mac and have MacPorts installed,
+you can use the command <tt>sudo port install netpbm</tt></li><p>
+
+<li>
+<b>Generating Random Expressions:</b> Your next programming task is
+to complete the definition of <tt>build</tt> in <tt>art.ml</tt>, of
+type <tt>int -> Expr.expr</tt>. The function should produce a random
+expression representable as a value of type <tt>expr</tt>.
+The integer parameter to <tt>build</tt>
+is a maximum nesting
+depth that the resulting expression should have. A bound on the
+nesting depth keeps the expression to a manageable size; it's easy to
+write a naive expression generator that can generate incredibly
+enormous expressions.  When you reach the cut-off point (i.e., <tt>depth</tt>
+is 0), you can simply return (the representation of)
+an expression with no sub-expressions,
+such as <tt>x</tt> or <tt>y</tt>.
+If you are not yet at the cut-off point,
+randomly select one of the forms of <tt>expr</tt> and recursively generate its
+subexpressions.
+
+<p> Use OCaml's <a href="http://caml.inria.fr/pub/docs/manual-ocaml/libref/Random.html"><tt>Random</tt> module</a> to get a source of
+(pseudo)randomness to use in your implementation of <tt>build</tt>.  In
+particular, the function <tt>Random.int</tt>, which returns a random
+integer between 0 (inclusive) and some given upper bound (exclusive), should be useful.
+(The function that calls <tt>build</tt> takes care of initializing the random number generator via <tt>Random.init</tt>, 
+so you don't have to worry about that here.)
+
+
+<p>A few notes:
+<ul>
+<li>
+A depth of 8-12 is reasonable to
+start, but experiment to see what you think is best.</li>
+<li>You
+need not choose each expression form with equal probability.  If every kind of
+expression can occur with equal probability at any point, it is very
+likely that the random expression you get will be 
+something small, because <tt>VarX</tt> or <tt>VarY</tt> will be chosen
+and cut off the recursion.  Since small expressions
+produce boring pictures, you should find some way to prevent or discourage
+expressions with no subexpressions from being chosen too early.
+There are many options for doing this; experiment and pick one
+that gives you good results.</li></ul>
+
+<p> You can test your
+code by running the function <tt>doRandomGray</tt> of type
+<tt>int * int -> unit</tt>,
+which uses <tt>build</tt> to create
+a random grayscale image.  The first integer argument is
+the maximum nesting depth for the random expression to be generated.
+The second integer argument is a <i>seed value</i>,
+which this function uses to initialize the random number
+generator.  These seeds can be arbitrary integers -- a given seed will produce
+the same sequence of random numbers (and therefore the same random picture) every time it is used.
+The invocation <tt>doRandomGray(d,s)</tt> emits the grayscale
+image as a file
+<tt>art-d-s.pgm</tt>.
+
+<p>Similarly, the function <tt>doRandomColor</tt> of type
+<tt>int * int -> unit</tt> creates a random color image.  
+Given a maximum expression depth and a seed for the
+random number generator, <tt>doRandomColor</tt>
+creates three random functions which are used to produce random red, green,
+and blue values, respectively, for each pixel.
+The invocation <tt>doRandomColor(d,s)</tt> emits the color
+image as a file
+<tt>art-d-s.ppm</tt>.  Note the different file extension.</li><p>
+
+<li><b>An Alternate Representation:</b> Rather than using a datatype
+to represent an expression, it might be more natural (and possibly more
+efficient) to use a function.  After all, a value of type <tt>expr</tt> really
+represents a function that takes an x-y coordinate (i.e., a pair of floats)
+and returns a pixel value (also a float).
+Since the signature <tt>EXPR</tt> hides the representation of the type
+<tt>expr</tt>, we are free to change that representation
+without affecting clients like the <tt>Art</tt> module.
+Accordingly,
+the file <tt>fexpr.ml</tt> provides a new implementation of the
+<tt>Expr</tt> structure, in which the type
+<tt>expr</tt> is just a <i>synonym</i> for the type <tt>float * float
+-> float</tt>.  
+
+
+<p>Complete <tt>fexpr.ml</tt> by properly defining the six "build"
+functions (i.e., <tt>buildX</tt>, <tt>buildY</tt>, <tt>buildSin</tt>,
+etc.)
+as well as the <tt>eval</tt> function, for our new representation of
+  expressions.  Hint:  The <tt>eval</tt>
+function should now be almost trivial.
+The
+<tt>exprToString</tt> function cannot be written
+successfully, since there is no way to convert an ML function to a
+string. Thus, you can leave that as is; it currently returns the
+string <tt>"unknown"</tt>.
+
+<p>
+To test your code, replace
+<tt>#use "dexpr.ml";</tt> in the file <tt>hw3.ml</tt> with
+<tt>#use "fexpr.ml";</tt>.  Notice the power of the separation of interface
+from implementation.
+We completely changed the representation of expressions and
+the associated functions.  However, since the new module still meets
+the <tt>EXPR</tt> signature, the <tt>Art</tt> structure can remain completely
+unchanged, and the implementer of that module need not even be aware of the
+change.
+</li><p>
+
+<li><b>Homework Submission:</b> Turn in your updated versions of the
+three OCaml
+files <tt>dexpr.ml</tt>, <tt>art.ml</tt>,
+and <tt>fexpr.ml</tt>.
+  Also turn in your two favorite images that
+you generated with your program.  <i>Lame images are not acceptable and will
+    not receive credit;
+play around with your code until you figure out a way to generate cool pictures. </i> All five files should be submitted
+through the course web page.
+</li>
+
+</ol>
+</body></html>

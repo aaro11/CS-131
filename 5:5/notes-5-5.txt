@@ -1,0 +1,212 @@
+
+interface StringSet {
+    boolean isEmpty();
+    void add(String s);
+    boolean contains(String s);
+    String get();
+}
+
+/*
+
+  StringSet s = new ArraySet();
+  if(s.isEmpty()) {
+    s.add("hello");
+  }
+  
+ */
+
+
+class ArraySet implements StringSet {
+    protected String[] elems;
+    protected int size;
+
+    public boolean isEmpty() { return size == 0; }
+
+    public boolean equals(Object o) { ... }
+}
+
+
+// generics, or parametric polymorphism
+interface Set<E> {
+    boolean isEmpty();
+    void add(E item);
+    boolean contains(E item);
+    E get();
+}
+
+/*
+
+  Set<String> s1 = ...;
+  s1.add("hello");
+
+  Set<Shape> s2 = ...;
+  s2.add(new Circle());
+  
+
+ */
+
+
+/* subtype polymorphism */
+
+interface RemovableStringSet extends StringSet {
+    void remove(String s);
+}
+
+class RemovableArraySet extends ArraySet
+    implements RemovableStringSet {
+	// inheriting all the operations from ArraySet
+    public void remove(String s) { ... }
+
+}
+
+/* subtype polymorphism: if T1 is a subtype of T2, then
+   values of type T1 can be used wherever values of type T2
+   are expected */
+
+void union(StringSet s1, StringSet s2) { ... }
+
+RemovableStringSet rs = ...;
+
+union(rs, new ArraySet());
+
+
+RemovableStringSet rs = ...;
+StringSet s = rs;
+rs.add("hello");
+rs.remove("hello");
+s.remove("hello"); // compile-time type error
+
+
+interface ObjectSet {
+    boolean isEmpty();
+    void add(Object s);
+    boolean contains(Object s);
+    Object get();
+}
+
+ObjectSet s = ...;
+s.add("hello"); // typechecks because String is a subtype of Object
+Object o = s.get();
+// ack!  lost the fact that this is a set of strings
+
+Object is the top of the class hierarchy, implicitly
+
+class Object {
+    String toString();
+    boolean equals(Object equals);
+}
+
+
+Don't confuse subtyping with inheritance:
+
+
+Subtyping is an "interface-level" property about behavioral/semantic compatibility:
+  - S is a subtype of T if I can use an S wherever a T is expected
+
+Inheritance is an "implementation-level" property that allows for code reuse
+  - if C inherits from D, then C is reusing some of the methods and fields of D
+  - just a convenience:  I could just copy the methods/fields of D into C manually
+
+
+* Subtyping without inheritance:
+
+  You might want to consider a Square to be a subtype of Rectangle.
+   - allows squares to be passed wherever Rectangles are expected
+
+   interface Rect { ... }
+   
+  class Rectangle implements Rect {
+    int length;
+    int width;
+    ...
+
+ }
+
+ class Square implements Rect {
+    int side;
+    ...
+ }
+
+
+* Inheritance without subtyping
+  - want Bags and Sets to share code without being in a subtype
+    relationship
+  - wouldn't make sense since they do different things for add()
+    (one allows duplicates; the other does not)
+
+  abstract class Collection {
+     Object[] elems;
+     ... // shared methods
+  }
+
+  class Bag extends Collection {
+    ...
+  }
+
+  class Set extends Collection {
+    ...
+  }
+
+
+Dynamic dispatch:
+
+  on a method call, invoke the "most-specific" method implementation
+  for the run-time class of the receiver object
+
+  class C {
+     void n() { this.m(); }
+     void m();
+  }
+
+  class D extends C {
+     void m() {}
+  }
+
+
+  D d = new D();
+  C c = d;
+  d.m();  // invokes D's m method
+  c.m();  // invokes D's m method
+
+  d.n();  // invokes D's m method
+  c.n();  // invokes D's m method
+
+
+    void myMethod(C c) {
+       c.n();
+    }
+
+
+  class MyClass {
+     private List lst = new ArrayList();
+
+  }
+
+Good OO style: an object knows how to do certain things.
+ - client should manipulate an object only through its interface
+ - client never knows what implementation the object uses
+
+Example: chess game
+
+  interface Piece { ... }
+
+  class Rook implements Piece { ... }
+  class Pawn implements Piece { ... }
+  ...
+
+  class Board {
+    void badMove(Piece p, int x, int y) {
+       if (p instanceof Pawn) {
+          ... check whether it's a legal move, and if so make it
+       } else if (p instanceof Rook) {
+         ...
+       }
+    }
+
+    void goodMove(Piece p, int x, int y) {
+       if (p.isValidMove(x,y)) {
+          p.move(x,y);
+       }
+    }
+
+  }

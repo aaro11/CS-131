@@ -1,0 +1,54 @@
+
+Final Exam:
+
+- OCaml: look at the midterm (and notes)
+
+- Java:
+  - inheritance vs. subtyping vs. dynamic dispatch
+
+  - write simple Java methods
+
+  - understand Java's memory model
+    - when are aliases created, how that affects behavior
+
+    Integer i = 5;
+    // translated to new Integer(5);
+    int j = i;
+    // translated to i.intValue();
+
+    Integer i = new Integer(4);
+    Integer j = i;
+    j = new Integer(5);
+    // the value of i is 4
+    
+    i.setValue(5); // not a legal method in class Integer
+
+    int i = 4;
+    int j = i;
+    j = 5;
+    // the value of i is 4
+    i++;
+    
+
+  - generics (parametric polymorphism)
+    - List<T>
+
+    class List<T> {
+
+       void add(T elem) { ... }
+
+       boolean contains(T elem) { ... }
+
+    }
+
+  - exceptions, includes Java's "throws" annotations on methods
+
+- Prolog:
+  - write simple predicates
+
+  - unification:  know whether two terms unify and what result is
+
+  - build the proof tree for a Prolog query
+    - what's the order of solutions, is there an infinite loop, ...
+
+    

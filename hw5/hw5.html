@@ -1,0 +1,290 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+lang="en"><head><title>Homework 5: Object-oriented Data Structures</title>
+</head>
+
+
+<body>
+<h1>Homework 5: Object-oriented Data Structures</h1>
+
+<h2>Due Friday, May 13, at 11:30pm</h2>
+<h3>Turn in your homework as a single Java file named <tt>hw5.java</tt>
+via the course web
+page.  Make sure the file can be successfully compiled with
+<tt>javac</tt>.
+</h3>
+
+<h3>Recall the CS131 Academic Honesty Policy!  You must say who you
+discussed the assignment with at the top of your assignment, and also what
+other resources you used.</h3>
+
+<p> Object-oriented languages typically provide a rich hierarchy of
+classes that represent common data structures (lists, sets, hash
+tables, etc.) and are widely used by programmers.  Java is no exception --- see the
+<a href="http://download.oracle.com/javase/6/docs/api/java/util/package-summary.html"><tt>java.util</tt></a> package.
+
+<p>For this assignment, you will write several implementations of a
+simple interface for a <i>set</i> of strings.  Take a look at the
+interface <tt>Set</tt> provided in the <tt>hw5.java</tt> file
+accompanying this assignment.  A <tt>Set</tt> supports checking
+whether a given string is in the set, adding a new string (by
+modifying the set in place), and obtaining the size of the set.
+(We'll add a few more methods later.)
+
+<p><i>The main point of this assignment is for you to figure out a nice
+object-oriented design for each of your <tt>Set</tt> implementations.
+I have provided detailed descriptions to guide you, but you need to
+think carefully about what design makes the best
+use of the object-oriented programming language features.  For example,
+make use of inheritance whenever that makes sense, in order to reuse code rather
+    than writing the same code multiple times.</i>
+
+<p>As usual, good style
+matters.  <b>Here are the rules:</b>
+ <ul>
+ <li>Use interfaces as types
+and classes as their implementations, rarely if ever using a class
+directly as a type.</li>
+ <li><i>Never</i> use type-unsafe features
+of Java, like casts and the <tt>instanceof</tt> expression.  If you need
+   to ever figure out the class of some object, then your design is not as
+   good as it should be.</li>   
+<!-- <li>You may not use any -->
+<!-- classes from the Java standard library other than <tt>String</tt></li>. -->
+<li>You may use any number of helper methods that you require.  Make those
+  <tt>protected</tt> or <tt>private</tt> as you see fit.
+</ul>
+
+<p>Normally each class or interface would go in its own file, but for
+convenience we will keep all of them in one file.
+
+<p><b>Testing your code: </b> We will test your code by creating a client that constructs
+instances of all the various classes you implement, calling methods on
+them, etc.  You should do the same -- I have provided a <tt>Test</tt>
+class for this purpose, along with some sample tests for the first problem below.
+You should add a bunch more tests for that problem and for the other ones.  You can
+run the tests by compiling <tt>hw5.java</tt> with <tt>javac</tt> and then saying <tt>java Test</tt> at
+the command line.
+
+<p>Some things that may help you:
+<ul>
+<li>All methods that are defined in order for a class to meet some
+interface must be declared <tt>public</tt>.
+<li> Arrays in Java are similar to those in C, but arrays are
+considered objects.  Here is the declaration of a local variable that
+is an array of 10 strings:
+<tt>String[] arr = new String[10];</tt></li>
+<li>Arrays in Java
+have a special field called <tt>length</tt>, which you can use to
+access its length.  For example, <tt>arr.length</tt> is 10.  The array
+<tt>arr</tt> can properly be accessed from index 0 to 9.</li>
+<li>Java has built-in string literals similar to those in ML,
+like <tt>"hello"</tt>, but Java treats the <tt>String</tt> type as a
+class and treats string literals as objects.  You can see the methods
+supported by the <tt>String</tt> class <a
+href="http://download.oracle.com/javase/6/docs/api/java/lang/String.html">here</a>.
+Of particular interest are the <tt>equals</tt> and <tt>compareTo</tt>
+methods.</li>
+<li>Java has <tt>for</tt> and <tt>while</tt>
+loops that behave as you would expect.  Java also has a special "for-each" loop for iterating over arrays and other collections.  Check out the <tt>sum</tt> example at the bottom of the page <a href="http://java.sun.com/j2se/1.5.0/docs/guide/language/foreach.html">here</a> for an example with arrays.  Use this loop instead of a regular <tt>for</tt> or <tt>while</tt> loop whenever possible.
+</li>
+<li>The implicit <i>receiver</i> argument to a method may be referred
+to within the method by the keyword <tt>this</tt>.</li>
+</ul>
+
+<ol>
+<li> Fix the broken implementation of the <tt>Set</tt> interface called
+<tt>ArraySet</tt>, which implements sets using an underlying array of
+strings to hold the elements of the set.  To do so, 
+  implement the <tt>contains</tt>, <tt>add</tt>, and <tt>size</tt> methods.
+An <tt>ArraySet</tt> contains a field <tt>elems</tt> for
+the array and an
+integer field <tt>size</tt>
+representing the current number of elements in the set.  The
+zero-argument
+constructor for <tt>ArraySet</tt> initializes the fields appropriately -- the array initially has
+ space for 5 elements.
+  The
+<tt>add</tt> method should check that the array is big enough before
+adding an element to the end of the list.
+If the array is not big enough, a larger array
+needs to be created, with the current elements copied into it, before
+the new element can be added.  A standard approach is to make the
+larger array have twice the size of the original array.  This ensures
+that you won't have to make a new array very often.  Of course, you
+should only add a new element if it is not already in the set.
+<p></li>
+
+<li> Arrays are useful, but they aren't very object-oriented.
+Fix the broken implementation of the <tt>Set</tt> interface called
+<tt>ListSet</tt>, which implements sets using an underlying linked list.
+To do so,
+  implement the class's constructor as well as the
+<tt>contains</tt>, <tt>add</tt>, and <tt>size</tt> methods.
+A <tt>ListSet</tt> has a field <tt>head</tt>
+representing the head node of the list, and that field has
+type <tt>ListNode</tt>.  A <tt>ListNode</tt> is either
+an <tt>EmptyNode</tt>, representing the end of the list,
+or a <tt>ValueNode</tt>,
+which represents a node containing some data.
+I've defined these interfaces and classes and provided their fields and constructors, but you have to implement the methods.
+
+<p>A <tt>ListNode</tt> supports the same three operations as
+supported by <tt>ListSet</tt>, and <tt>ListSet</tt> should implement
+its functionality by calling the appropriate methods on its head node,
+which will do most of the work.
+New elements should
+always be added to the end of the list.
+The key design principle is the following: <b>The <tt>ListSet</tt> should never
+have to know whether the <tt>head</tt> is empty or not, and a value node should
+never have to know whether its <tt>next</tt> pointer is empty or not.</b>
+To implement things such that this design principle is followed,
+the <tt>add</tt> method for a <tt>ListNode</tt>
+has return type <tt>ListNode</tt>,
+representing the current node's replacement in the list after the
+addition.</i>
+
+<p>The <tt>EmptyNode</tt> is empty (hence the name) -- it does not
+store any value. It is really just used as a marker to indicate the
+end of the list. Without it, you'd have to instead use
+something like <tt>null</tt> to represent the end of the list, which
+is less object-oriented and more error prone.  Further, the <tt>EmptyNode</tt> "knows" how to respond to the three messages of a <tt>ListNode</tt>, unlike the <tt>null</tt> value, which supports no useful operations.
+<p></li>
+
+<li>Implement the
+<tt>SortedListSet</tt> class, which is like <tt>ListSet</tt>
+but keeps the strings in sorted order, from least to greatest according to
+<tt>String</tt>'s <tt>compareTo</tt> method.  The
+implementation of <tt>add</tt> needs to ensure that this invariant is
+maintained, and the implementation of <tt>contains</tt> should make
+use of this invariant to create a more optimized implementation than
+that of <tt>ListSet</tt>.  You
+may also need to create new helper classes, like
+<tt>SortedEmptyNode</tt> and <tt>SortedValueNode</tt>.
+Whenever new classes are necessary,
+you should use inheritance to reuse as much code from your
+solution to the previous problem as makes sense.
+<p></li>
+
+<li>Uncomment the <tt>isEmpty</tt> and <tt>addAll</tt> methods from
+the <tt>Set</tt> interface.  These methods should be able to be
+implemented once and shared by all the various <tt>Set</tt>
+implementations.  Therefore, fix the implemention of the <tt>abstract</tt> class
+<tt>AbstractSet</tt>
+and modify the existing implementations of the <tt>Set</tt>
+interface to inherit (possibly transitively) from
+<tt>AbstractSet</tt>.  The <tt>addAll</tt> method should add every
+String in the given array to the set; the for-each loop for iterating over
+arrays will come in handy
+here (see the tips before the first problem above).
+
+<p>Because <tt>AbstractSet</tt> is declared <tt>abstract</tt>, it does not need to implement all the methods of the <tt>Set</tt> interface.
+Of course, subclasses that are not abstract must properly implement or inherit the necessary methods.
+Therefore, the implementation of <tt>AbstractSet</tt> can safely invoke these methods.  This is an example of a <i>downcall</i>, which
+leverages dynamic dispatch to support code reuse.
+<p></li>
+
+<li> Java uses a notion of <i>iterators</i> as a uniform way for
+clients to iterate over the elements of a data structure, without
+having to know about the underlying representation of that data
+structure.  Take a look at the <a
+href="http://download.oracle.com/javase/6/docs/api/java/util/Iterator.html"><tt>Iterator</tt></a>
+interface in the Java standard library.  The methods allow a client
+access to the elements of some collection one by one.  The
+<tt>hasNext</tt> method is used to find out if we've seen all elements
+already, and the <tt>next</tt> method returns the next element of the
+collection to be visited.  Iterators also optionally support a
+<tt>remove</tt> method for removing elements from the collection, but
+we will not support this functionality (our implementations of this method throw an <tt>UnsupportedOperationException</tt> to indicate this).
+
+<p>Notice that
+the <tt>Iterator</tt> interface
+is parameterized by a type variable <tt>E</tt>, representing
+the type of the elements being iterated over.  In other words, the type
+<tt>Iterator&#60E&#62</tt> is akin to an ML type like <tt>'a iterator</tt>.
+
+<p>Collections that support iteration should be declared to meet the
+ <a
+ href="http://download.oracle.com/javase/6/docs/api/java/lang/Iterable.html"><tt>Iterable</tt></a>
+ interface, which provides a method for obtaining an iterator for the
+ collection.  Uncomment the <tt>iterator</tt> method signature in
+ <tt>Set</tt> and the <tt>extends Iterable&#60String&#62</tt> clause
+ in the header of <tt>Set</tt>.  Again note the use of parametric
+ polymorphism: <tt>Set</tt> is a subtype of a particular instantiation
+ of the <tt>Iterable</tt> interface, and the <tt>iterator</tt> method
+ returns an iterator for strings.  Your job is to update <tt>ArraySet</tt> and
+<tt>ListSet</tt> to support the <tt>iterator</tt> method (the <tt>SortedListSet</tt> will implicitly inherit this functionality from <tt>ListSet</tt>).  In order to
+do so, you will also have to fix the implementation of the classes <tt>ArrayIterator</tt> and
+<tt>ListIterator</tt> that respectively are iterators for those two
+classes.
+
+<p>Once you've done this successfully, clients will be able to iterate over
+your sets.  For example, the following code prints each element of a set:
+
+<p><tt>
+Set s = ...;<br>
+for(Iterator&#60String&#62 iter = s.iterator(); iter.hasNext();) {<br>
+&nbsp;&nbsp;  System.out.println(iter.next());<br>
+  }</tt>
+
+<p>The really cool part is that any type that is a subtype of <tt>Iterable</tt>
+can be iterated over using the for-each loop, to avoid explicitly manipulating an iterator.
+So the following code has the same behavior as the more explicit (and ugly)
+code above:
+
+<p><tt>
+Set s = ...;<br>
+for(String str : s) {<br>
+&nbsp;&nbsp;  System.out.println(str);<br>
+  }</tt>
+
+<p>Use this style whenever possible.
+
+<p>To get experience with a useful feature of Java, you will define
+<tt>ArrayIterator</tt> and <tt>ListIterator</tt> as <i>inner classes</i> of
+<tt>ArraySet</tt> and <tt>ListSet</tt>, respectively.
+Aside from fields and methods,
+classes can contain the definitions of other classes, similar to the way that
+functions in OCaml can contain nested function declarations.
+Using inner classes here makes sense, because the
+iterator is really part of the same abstraction as the set, and
+the iterator should not be able to be created independently from an
+associated set.  Doing this also enables the iterator's
+implementation to directly access the fields and methods of its associated
+set, since they are in the static scope of the inner class.
+For example, the <tt>ArrayIterator</tt> will need access to the
+underlying array of elements.
+
+<p> <tt>ArrayIterator</tt> has a field <tt>curr</tt> that holds the
+index of the next element to be visited during iteration.  This field
+should be intialized to zero, the <tt>hasNext</tt> method should use
+<tt>curr</tt> to decide if we've visited all elements of the set, and
+the <tt>next</tt> method should return the next element to be visited
+and increment <tt>curr</tt>.  The implementation of
+<tt>ListIterator</tt> will be similar, except that <tt>curr</tt> is
+now a <tt>ListNode</tt>.  You should also add accessor methods
+<tt>value</tt> and <tt>next</tt> to the <tt>ListNode</tt> interface,
+for use here.  The versions of these methods in <tt>ValueNode</tt>
+should return the associated field.  The versions of these methods in
+<tt>EmptyNode</tt> can simply return <tt>null</tt>; a less error-prone
+way to handle this kind of situation is to throw an
+exception, but we'll omit that here for simplicity.
+
+<p>If <tt>javac</tt> gives you a warning that looks like this:
+<br><tt>Note: hw5.java uses unchecked or unsafe operations.<br>
+Note: Recompile with -Xlint:unchecked for details.</tt>
+<br>
+this likely means that you're missing some necessary type parameters (e.g., you're using the type <tt>Iterator</tt> instead of <tt>Iterator&#60String&#62</tt>).  Recompile
+with the flag mentioned above to get a useful error message.  The code you turn in should not have compiler warnings.
+
+<p>
+</li>
+
+<li>As a simple client of your iterators, implement the
+<tt>subsetOf</tt> method in <tt>Client</tt>.  The method should
+take two sets and return a boolean indicating whether or not the first set is a subset of
+the second set.  This is another good opportunity to use the for-each loop, which will implicitly employ the iterators you implemented above.
+The client should naturally do the right thing regardless of what kinds of sets are passed to it.  Isn't separation of interface from implementation great?
+<p></li>
+</ol>
+</body></html>

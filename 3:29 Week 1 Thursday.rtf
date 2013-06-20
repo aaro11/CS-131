@@ -1,0 +1,211 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1038\cocoasubrtf350
+{\fonttbl\f0\fnil\fcharset0 Monaco;}
+{\colortbl;\red255\green255\blue255;}
+\margl1440\margr1440\vieww13380\viewh17100\viewkind0
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\ql\qnatural\pardirnatural
+
+\f0\fs24 \cf0 Static typechecking (type inference)\
+----------------------------------\
+* determine the type of each expression at compile time (before execution)\
+\
+ex: \
+sumList: int list -> int\
+	- when given any argument of type int list, it will give you an int\
+	- no type errors during execution\
+		- treating a value of one type as if it is another type\
+			- add an integer to a string, etc\
+\
+other benefits of static typechecking:\
+	- *checked program documentation\
+		- you can ensure/check data types\
+	\
+	- *enforce user-defined abstractions \
+\
+	- efficient implementation (not our focus much)\
+		- special representation for each type (allocating certain amount of bits, etc)\
+\
+polymorphic types:\
+	- typechecker has to find an instantiation of each type variable (ie. 'a) with some type in order to allow the expression to typecheck \
+		- this happens at compile time\
+\
+--------------\
+Pattern matching:\
+\
+What patterns have we seen so far?\
+\
+p ::= c (* constant *) | _ (* wildcard *) | p1::p2 (* patterns in a list *) | \
+	[p1;...;pn] (* a list *) | (p1,...,pn) (* two pole *) | x (* variable *) \
+\
+'c' can be boolean, float, int, etc\
+\
+-----------------\
+~ Cant refer to a certain variable multiple times\
+\
+(* bad contains *)\
+let rec badcontains (e, lst) = \
+	match let with\
+		[] -> false (* empty list -> return false *)\
+	| e::xs -> true (* actually redeclares e as a new variable *)\
+	| _::xs -> badcontains (e,xs) \
+\
+(* variation of another bad contains *)\
+let rec badcontains2 args =\
+	match args with\
+		(e, []) -> false\
+	| (e, e::xs) -> true\
+	| (e, _::xs) -> badcontains2(e, xs)\
+\
+(* correctly *)\
+let rec contains (e, lst) =\
+	match let with\
+		[] -> false\
+	| x::xs -> if x=e then true else contains (e, xs)\
+	| x::xs -> x=e || contains (e, xs) (* same as previous line *)\
+\
+(* giving a name to a value *)\
+let rec contains2 (e, lst) =\
+	match let with\
+		[] -> false\
+	| x::xs -> \
+		(* variable doesn't work outside the scope *)\
+		let isFirst = x=e in\
+			isFirst || contains2(e, xs)\
+\
+------------\
+SYNTAX:\
+let p=e1 in (* arbitrary list *)\
+	e2 (* p scopes until this line *)\
+\
+of type declarations:\
+type name = C1 of t1 | ... |  \
+\
+---------------\
+(* unzip *)\
+let rec unzip (lst: ('a *'b) list) : ('a list * 'b list) = \
+	match let with\
+		[] -> ([], [])\
+	| (x,y)::xs -> \
+		let (l1, l2) = unzip xs in\
+			(x::l1, y::l2)\
+-------------------------\
+(* algebraic datatypes (or recursive datatypes) *)\
+\
+type sign = Pos | Neg | Zero\
+# Pos=Neg;;\
+- : bool = false\
+# Pos=Pos;;\
+- : bool = true\
+# Pos;;\
+- : sign = Pos\
+\
+(* sign of a number: int -> sign *)\
+let signOf n =\
+	match n with\
+		0 -> Zero\
+	| _ -> if n > 0 then Pos else Neg\
+# signOf 34;;\
+- : sign = Pos\
+# signOf (-34);;\
+- : sign = Neg\
+\
+(* sign to int: sign -> int *)\
+let signToInt s =\
+	match s with\
+		Pos -> 1\
+	| Neg -> -1\
+	| Zero -> 0\
+# signToInt Pos\
+- : int = 1\
+# signToInt Neg\
+- : int = 0\
+\
+------\
+(* sometimes called a tag union *)\
+(* DECLARE SHAPE *)\
+type shape = Square of float | Triangle of float * float\
+\
+# Square;;\
+Error: expects 1 argument\
+# Square 3.4;;\
+- : shape = Square 3.4\
+# Triangle (1.2, 3.4);;\
+- : shape = Triangle (1.2, 3.4)\
+\
+(* AREA FUNCTION *)\
+let area s = \
+	match s with\
+		Square x -> x*.x\
+	| Triangle (base, height) -> base *. height /. 2.0\
+\
+# area (Square 3.4);;\
+- : float = 11.5599999999999\
+# area (Triangle (2.0, 3.0))\
+- : float = 3.0\
+\
+type intList = Empty | Cons of int * intList\
+\
+(* [1;2;3] is the same as 1::2::3::[] => represented as \
+	Cons(1, Cons(2, Cons(3, Empty))) *)\
+\
+(* SUMLIST WITH MY intList *)\
+let rec sumList lst =\
+	match lst with\
+		Empty -> 0\
+	| Cons(x, xs) -> x + (sumList xs)\
+\
+# sumList Cons(1, Cons(2, Cons(3, Empty)));;\
+-: int = 6\
+\
+(* TREE OF DATA, LEFT, RIGHT, RESPECTIVELY *)\
+type intTree = Leaf | Internal of int * intTree * intTree\
+\
+(* SIZE OF TREE *)\
+let rec size tree =\
+	match tree with\
+		Leaf -> 0\
+	| Internal(_, l, r) -> 1 + (size l) + (size r)\
+\
+# let myTree = Internal(1, Internal(2, Leaf, Leaf), Internal(45, Leaf, Leaf));;\
+val myTree : \
+(* didn't copy this *)\
+# size myTree\
+- : int = 5\
+\
+(* declaring a polymorphic list *)\
+type 'a myList = Empty | Cons of 'a * 'a myList\
+\
+(* ML defines this exactly as written *)\
+type 'a option = None | Some of 'a\
+# Some 34;;\
+- : int option = Some 34\
+# None;;\
+- : 'a option = None\
+\
+let sqrt n =\
+	if n > 0. then (* this should be square root *) Some 1.\
+	else None\
+# sqrt 3.4;;\
+- : float option = Some 1.\
+# sqrt (-1.0);;\
+- : float option = None\
+# let myNum = sqrt(-1.0);;\
+val myNum : float option = None\
+# match myNum with\
+	None -> 0.\
+	| Some f -> f;;\
+- : float = 0.\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+}

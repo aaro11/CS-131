@@ -1,0 +1,76 @@
+Macintosh.local:/Users/todd
+Macintosh /Users/todd [1] -> cd cs131/notes/
+Macintosh.local:/Users/todd/cs131/notes
+Macintosh /Users/todd/cs131/notes [2] -> ocaml
+        Objective Caml version 3.11.1
+
+# let length (lst:int list) =
+    match lst with
+      [] -> 0
+    | x::xs -> 1 + (length xs);;
+Error: Unbound value length
+let rec length (lst:int list) =
+  match lst with
+    [] -> 0
+    | x::xs -> 1 + (length xs);;
+val length : int list -> int = <fun>
+# length [1;2;3];;
+- : int = 3
+# length ["hi";"bye"];;
+Error: This expression has type string but an expression was expected of type
+         int
+let rec length lst =
+  match lst with
+    [] -> 0
+  | x::xs -> 1 + (length xs)
+    ;;
+val length : 'a list -> int = <fun>
+# length [1;2;3];;
+- : int = 3
+# length ["hi";"bye"];;
+- : int = 2
+# length [(3,"hi"); (2,"bye")];
+  ;;
+- : int = 2
+let rec length (lst:'a list) =
+  match lst with
+    [] -> 0
+    | x::xs -> x + (length xs);;
+val length : int list -> int = <fun>
+let rec length (lst:'a list) =
+  match lst with
+    [] -> 0
+    | x::xs -> 1 + (length xs);;
+val length : 'a list -> int = <fun>
+# length 45;;
+Error: This expression has type int but an expression was expected of type
+         'a list
+# let swap (x,y) = (y,x);;
+val swap : 'a * 'b -> 'b * 'a = <fun>
+# swap (2,"hi");;
+- : string * int = ("hi", 2)
+# swap (2,"hi",45);;
+Error: This expression has type int * string * int
+       but an expression was expected of type 'a * 'b
+# ^D
+
+Macintosh /Users/todd/cs131/notes [3] -> sml
+Standard ML of New Jersey v110.72 [built: Wed Feb  3 11:03:59 2010]
+- 1+2;;
+val it = 3 : int
+- 1.0+2.0;;
+val it = 3.0 : real
+- ^D
+Macintosh /Users/todd/cs131/notes [4] -> ocaml
+        Objective Caml version 3.11.1
+
+let rec trFact n acc =
+  match n with
+     0 -> acc
+     | _ -> trFact (n-1) (n * acc);;
+val trFact : int -> int -> int = <fun>
+# trFact 5 1;;
+- : int = 120
+# trFact 3 1;;
+- : int = 6
+# 

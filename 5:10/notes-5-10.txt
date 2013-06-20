@@ -1,0 +1,55 @@
+
+Constructors in Java:
+
+class C {
+  protected int i;
+  protected String s;
+
+    C(int i, String s) { this.i = i; this.s = s; }
+}
+
+class D extends C {
+    protected boolean b;
+
+    D(int i, String s, boolean b) {
+	super(i, s);
+	this.b = b;
+    }
+    
+}
+
+---------------
+
+Parameter passing *by reference*:
+ make the formal parameter an alias of the actual parameter
+
+ [Java does not support this!  Java only has by-value parameter
+ passing.]
+
+ C++ example:
+
+int add(int& a, int& b) {
+    a+=b;
+    return a;
+}
+
+x = 3;
+y = 4;
+z = add(x,y);
+
+the arguments to add must be l-values -- things that can appear
+on the left-hand-side of an assignment
+
+z = add(3,4); // error; not allowed
+
+you can also get the same behavior explicitly in C/C++ (but not Java!) with pointers:
+
+	       int add(int* a, int* b) {
+	            *a += *b;
+		    return *a;
+	       }
+
+	       int x = 3;
+	       int y = 4;
+
+	       add(&x, &y);

@@ -1,0 +1,71 @@
+
+/* in ML:
+   let intersect(s1, s2) =
+     match (s1, s2) with
+       (Rect, Rect) -> ...
+     | (Rect, Tri) -> ...
+*/
+
+// JPred:  extends Java with *predicate dispatch*
+
+interface Shape {
+    boolean intersect(Shape s);
+}
+
+class Rect implements Shape {
+
+    public void m(int i)
+	when i > 0 {}
+      | when i <= 0 {}
+
+    public boolean intersect(Shape s)
+	when s@Rect {
+	System.out.println("intersect with Rect");
+	return true;
+    }
+
+    public boolean intersect(Shape s)
+	when s@Tri && s.height > 5 {
+	s.m();
+	System.out.println("intersect with Tri");
+	return true;
+    }
+
+    public boolean intersect(Shape s)
+	when s@Tri && s.height > 10 {
+	s.m();
+	System.out.println("intersect with Tri");
+	return true;
+    }
+
+    public boolean intersect(Shape s) {
+	return true;
+    }
+
+}
+
+class Square extends Rect {
+
+    public boolean intersect(Shape s) when s@Tri { return true; }
+    
+}
+
+class Tri implements Shape {
+
+    int height;
+    int base;
+
+    public boolean intersect(Shape s) { return true; }
+
+    public void m() {}
+
+}
+
+class Client {
+
+    public static void main(String[] args) {
+	Shape r = new Rect();
+	Shape t = new Tri();
+	r.intersect(t);
+    }
+}

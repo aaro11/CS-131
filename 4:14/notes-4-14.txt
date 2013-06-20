@@ -1,0 +1,59 @@
+
+Another dimension to compare forms of typechecking:
+
+* strong vs. weak
+  - a strongly typed language never allows a primitive operation to be invoked
+     with arguments of the wrong types
+
+     - ML, Java, C#, Python, Lisp, ...
+
+  - a weakly typed language can allow some type errors to go
+    undetected
+    - C/C++
+
+    - casts
+    - pointer arithmetic
+        *(p+4)
+    - array bounds
+    - dangling pointers
+
+  tradeoffs:  strong typechecking costs more at run time, but *much*
+  safer
+  
+
+  - statically, strongly typed languages:
+    - ML, Java, C#
+
+  - statically, weakly typed languages:
+    - C, C++
+
+  - dynamically, strongly typed languages:
+    - Lisp, Python, Ruby, ...
+
+  - dynamically, weakly typed languages:
+     - don't exist as far as I know
+
+
+A final dimension:
+ * type checking versus type inference
+ 
+
+ ==============
+
+ A *module* or a *structure* is just a named sequence of declarations
+
+ module Name = struct
+    d1
+    d2
+    ...
+    dn
+ end
+
+
+ Key idea: separation of interface from implementation
+   - clients depend only on the interface
+   - can enforce important invariants
+     - ensures that a set never has duplicates
+   - allows the implementer flexibility
+     - implementer can change the implementation without
+       breaking clients (as long as the interface doesn't change)

@@ -1,0 +1,18 @@
+(* Week 4 Thursday 4/21/11
+Parametric  Polymorphism
+------
+let rec length lst = 
+   match lst with
+   [] -> 0
+   | x::xs -> 1 + (length xs)
+
+you can think of the type variable as an extra argument
+
+'a is a type variable 
+   - can be instatiated with any time
+   - this instantiation happens at compile time
+  
+key point about parametric polymorphism:
+   - one piece of code
+   - can be used safely with arguments of several different types
+*)

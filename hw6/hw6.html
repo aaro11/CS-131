@@ -1,0 +1,256 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+lang="en"><head><title>Homework 6</title>
+</head>
+
+
+<body>
+
+<h1>Homework 6: Random Literature</h1>
+
+<h2>Due Wednesday, May 25, at 11:30pm</h2>
+<h3>Turn in your four Java files 
+via the course web
+page:
+<tt>SequenceCount.java</tt>, <tt>MostCommonSeq.java</tt>, <tt>RandomPhrase.java</tt>, and
+<tt>MiniMapReduce.java</tt>.
+Make sure the files can be successfully compiled with
+<tt>javac</tt>.
+</h3>
+
+<h3>Recall the CS131 Academic Honesty Policy!  You must say who you
+discussed the assignment with at the top of your assignment, and also what
+other resources you used.</h3>
+
+<p>You've already created random art in this class; how about some
+random literature?  The idea of this assignment is to mine classic
+works of literature for common word sequences and string them together to make
+(hopefully) interesting phrases and sentences.
+To do this large-scale data processing, you will use Google's MapReduce.
+
+<p>As we discussed in class, MapReduce is a programming paradigm inspired
+from functional programming that Google has developed in order to
+express their own internal computations over large data sets. Google's
+implementation of MapReduce is not available publicly, but <a href="http://hadoop.apache.org">Hadoop</a>
+is an open-source version
+of MapReduce. It would be ideal to use Hadoop for this assignment, but
+Hadoop is a real system, and as with any real system, it takes time
+to get familiar with it, more time than one can spend on a single
+programming assignment for our class.
+
+<p>As a result, for you to get a flavor of what it is like to program in
+MapReduce, we have implemented our own simple version of MapReduce,
+called MiniMapReduce, that runs on a single computer. Although
+MiniMapReduce does not distribute computations across many computers,
+it will allow you to program in the MapReduce model and get familiar
+with it. Once you understand the model, your knowledge and experience
+will translate into more realistic MapReduce frameworks like
+Hadoop.
+
+<p>As usual, good style matters.  In addition to our usual style
+rules, make sure that the <tt>javac</tt> compiler never gives you this
+warning:
+
+<p>
+<tt>
+Note: Blah.java uses unchecked or unsafe operations.<br>
+Note: Recompile with -Xlint:unchecked for details.
+</tt>
+
+<p> This warning indicates that you are not using parameterized types properly.
+In particular, you are probably forgetting a type parameter somewhere, for
+example declaring a variable of type <tt>List</tt> rather than
+<tt>List&#60String&#62</tt>.  If you get this warning, recompile using
+the specified flag, and the compiler will point out the errors that you need
+to fix.
+
+<p>Now on to the assignment!
+
+<ol> <li> To start, you need to get familiar with the MapReduce programming
+model. Read the attached paper on MapReduce, written by its inventors at
+  Google.  You only really need to read Sections 1 and 2, but if you are
+interested you can also read the rest.  (You might
+  also browse through the lecture
+  notes on MapReduce from class, which are posted on the course web page.)<p>
+
+  Now unzip the provided zip file (double clicking on it will probably work;
+  otherwise try <tt>unzip hw6.zip</tt>), which contains the code for
+  MiniMapReduce.</li>
+  
+<li>
+  Java doesn't have first-class functions, as in ML, but they can be
+  simulated with objects.  Take a look at the <tt>Mapper</tt>
+  interface, which intuitively represents one of the user-defined functions to
+  pass to MapReduce.  The interface has a single method named <tt>apply</tt>
+  representing this function; note that it has the same type as
+  specified for the user-defined <tt>map</tt> function in Section 2.2
+  of the MapReduce paper.  So <tt>m.apply(...)</tt>, where <tt>m</tt> is a
+  user-defined implementation of <tt>Mapper</tt>, can be used to invoke
+  the user's desired mapping function.
+  Similarly, our <tt>Reducer</tt> interface has a
+  single method representing the user-defined <tt>reduce</tt>
+  function.  (For simplicity our reducer returns a single item rather than a list.
+  As mentioned in the MapReduce paper, returning 0 or 1 items is the common case.)
+  The interface
+  <a
+  href="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Map.Entry.html">
+  <tt>Map.Entry</tt></a> in Java's standard library represents a
+  (key,value) pair.
+    Our <tt>MREntry</tt> class implements this interface.
+  
+  <p>Now look at the file
+<tt>WordCount.java</tt>, which gives you an implementation of the word
+count example that was covered in class and that was explained in the
+MapReduce paper. The <tt>WordCount</tt> class counts the
+number of times that words occur in a set of files that are passed in
+on the command line. The output is written to a file
+<tt>wordcount.out</tt>. To compile the code, type <tt>javac WordCount.java</tt>, and
+to run it, type <tt>java WordCount gulliver huckleberry</tt>. This will count the
+  words in two classic books we have provided and put the results
+  in the file <tt>wordcount.out</tt>. (Many more books can be downloaded from
+  <a href="http://www.gutenberg.org/wiki/Main_Page">Project Gutenberg</a>.)
+  
+
+<p>All that <tt>WordCount</tt> does is create an implementation of
+  <tt>Mapper</tt>, create an implementation of <tt>Reducer</tt>, and then
+  use these to create an instance of <tt>MiniMapReduce</tt> that solves the
+  problem.  The constructor of <tt>MiniMapReduce</tt> takes the user's
+<tt>Mapper</tt> and <tt>Reducer</tt> implementation.
+<tt>MiniMapReduce</tt> also has a function <tt>mapReduce</tt> that
+  takes an initial list of (key,value) pairs and performs the mapReduce
+computation using that <tt>Mapper</tt> and <tt>Reducer</tt>.  Our
+<tt>FileUtil</tt> class has helper methods for reading a file's contents
+into a <tt>String</tt> and for writing the results of a MapReduce computation
+to a file.
+
+<p>The user-defined implementations of <tt>Mapper</tt> and <tt>Reducer</tt>
+use Java's ability to create <i>anonymous classes</i>.  For example, the
+first line of <tt>main</tt> in <tt>WordCount.java</tt> creates a new (unnamed)
+class that meets the <tt>Mapper</tt> interface, provides an implementation for
+<tt>apply</tt>, and creates an instance of this class, all in one declaration.
+This is the Java equivalent of anonymous functions like <tt>(function x -> ...)</tt> in ML!
+</li><p>
+
+<li>Once you've understood how the word count example works, complete
+the implementation of the sequence count code that is found in
+<tt>SequenceCount.java</tt>. This mapReduce job should count the 
+number of times that each sequence
+(represented as a Java <a href="http://download.oracle.com/javase/6/docs/api/java/util/List.html"><tt>List</tt></a>) of five words occurs in the files that are passed in 
+on the command line. It is very similar to word count, except that you
+are not counting words, but rather sequences of words. You simply need to fill in
+the implementation of the two <tt>apply</tt> functions in
+<tt>SequenceCount.java</tt>, one for the map implementation, and one for
+the reduce implementation.  Currently they each just throw an
+exception.
+
+<p>You can see from the word count example how to split a string into words.  See the <tt>split</tt> method
+of <a href="http://download.oracle.com/javase/6/docs/api/java/lang/String.html"><tt>String</tt></a> for more details.
+That method takes as an argument a pattern to use as a delimiter between substrings to be produced.  The pattern "\s" represents
+all whitespace (to represent this pattern in your program you have to "escape" the slash, so the Java string will be "\\s", as you can
+see in the word count example).
+
+<p>However, not all of these substrings are words.  For example, splitting the phrase <tt>it was the best of times; it was the worst of times.</tt> will produce (among others) the words <tt>"times;"</tt> and <tt>"times."</tt>.
+Extracting just the word part is complex in general.  We'll use a simple heuristic that works well enough to get interesting results.
+For each substring, <tt>split</tt> it again with the pattern "[^a-z']", which says you're using everything except lower-case letters and the apostrophe
+as delimiters between substrings that you care about.  Now take the first substring produced in the returned array and use that as the
+word, throwing the rest away.  In the above example this will have the effect of removing the undesired punctuation.
+
+<p><b>Careful:</b> The <tt>split</tt> method can produce empty substrings, so you'll want to filter those out before creating all
+subsequences of size 5.
+
+<p>Once your code is working and compiled successfully with <tt>javac</tt>,
+you can type <tt>java SequenceCount filenames</tt> to test your
+code on various files; output will be written to <tt>seqcount.out</tt>.  For example, <tt>java SequenceCount dickens</tt>, where <tt>dickens</tt> contains the snippet above,
+should produce the following file contents (our framework takes care of printing this file for you from the result you produce; it represents a key-value pair as "key : value"):
+
+<p><tt>[best, of, times, it, was] : 1<br>
+[it, was, the, best, of] : 1<br>
+[it, was, the, worst, of] : 1<br>
+[of, times, it, was, the] : 1<br>
+[the, best, of, times, it] : 1<br>
+[times, it, was, the, worst] : 1<br>
+[was, the, best, of, times] : 1<br>
+[was, the, worst, of, times] : 1</tt>
+
+<p>I've also provided the output for running my sample solution on <tt>gulliver</tt> 
+to help you figure out if your
+code is working correctly on a larger example.
+In a Linux or Mac OS X shell, or under cygwin on Windows, you can do <tt>diff seqcount.out seqcount-gulliver.out</tt> to
+see how your solution compares to ours.  You should also
+test your code on smaller files to make sure it works as expected.</li>
+<p></li>
+
+<li>Complete the implementation of the mapReduce job in <tt>MostCommonSeq.java</tt>, which uses the results
+from the mapReduce job above.  The goal is to produce for each word, the most common 5-word sequence starting with that word.
+The map job takes as input the output from the above problem -- pairs of a 5-word sequence and an integer.  The map phase should
+produce for each such pair a pair consisting of the first word in the sequence and a list containing 5 strings:  a string representation of the
+number of times the input sequence appears followed by the four remaining words in the sequence.  For example, given the pair
+<tt>["it", "was", "the", "best", "of"]</tt> and <tt>1</tt> as key-value input
+(represented as a list of strings and an integer), the map phase should
+produce the pair <tt>"it"</tt> and <tt>["1", "was", "the", "best", "of"]</tt> (represented as a string and a list of strings).
+
+<p>The reduce job takes as input a pair of a word (e.g., <tt>"it"</tt>) and a list of the values corresponding to that key that result
+from the map phase (e.g., <tt>[["1", "was", "the", "best", "of"], ["1", "was", "the", "worst", "of"]]</tt> and produces
+the most common 4-word sequence following the given word.  If there is a tie (as in our example), then the earliest one in
+sorted order should be used.  So in our example, the result of the reduce phase should be <tt>["was", "the", "best", "of"]</tt>.
+It may be useful to know about the static method <tt>Integer.parseInt()</tt> which returns an integer corresponding to a given
+string argument (e.g., <tt>Integer.parseInt("5")</tt> returns the number 5).
+
+<p>Once your code is working and compiled, you can type <tt>java MostCommonSeq</tt> to test your
+code on the results from the previous problem sitting in <tt>seqcount.out</tt>.
+The result will be put in <tt>mostcommonseq.out</tt>.  For example, when <tt>seqcount.out</tt> holds the results shown above
+for the Dickens snippet, the result of this phase should be:
+
+<p><tt>best : [of, times, it, was]<br>
+it : [was, the, best, of]<br>
+of : [times, it, was, the]<br>
+the : [best, of, times, it]<br>
+times : [it, was, the, worst]<br>
+was : [the, best, of, times]</tt>
+
+<p>I've also provided the results from our sample solution when using the sequence count results for <tt>gulliver</tt>.
+
+<p></li>
+
+<li>Now implement the method <tt>genPhrase</tt> in <tt>RandomPhrase.java</tt>.  The method takes as arguments
+the output from the second mapReduce job above, a starting word for the phrase, and the number of sequences to string together
+in creating the resulting
+phrase.  If you ever need a sequence starting from some word that is not the starting word of any sequence, return <tt>null</tt>.
+Here are some examples on the results from doing the above two mapReduce jobs on <tt>gulliver</tt>:
+
+<p><tt>
+java RandomPhrase on 1<br>
+on the day of june<br><br>
+java RandomPhrase on 2<br>
+on the day of june about nine months after<br><br>
+java RandomPhrase i 3<br>
+i made a shift to trouble the reader with a particular account of<br><br>
+java RandomPhrase once 4<br>
+once adorned her majesty's head about two inches but i did not observe all the above articles</tt>
+
+<p>Random literature!
+
+<p></li>
+
+<li>Update our <tt>MiniMapReduce</tt> class to handle exceptions that are
+thrown by user-defined <tt>Mapper</tt>s and <tt>Reducer</tt>s.  To do so, uncomment the <tt>throws
+MRException</tt> clause on the <tt>apply</tt> methods of <tt>Mapper</tt>
+and <tt>Reducer</tt>.  The intent is that a user-defined mapper or reducer
+can explicitly throw an <tt>MRException</tt>, to indicate to the <tt>MiniMapReduce</tt> framework that the current pair of data being processed should not
+be included in the overall results.
+
+<p>If you recompile <tt>MiniMapReduce.java</tt>, there
+will be a compile-time error, because <tt>MiniMapReduce</tt> is not handling
+this exception.  Update the implementations of <tt>map</tt> and <tt>reduce</tt> in <tt>MiniMapReduce</tt> to handle an <tt>MRException</tt>
+by ignoring the current
+invocation of the mapper or reducer and continuing to process the rest of the
+data.  Make sure you don't ignore the entire rest of the data by mistake!
+
+<p>Make sure your updated <tt>MiniMapReduce</tt> compiles successfully.  Also
+test it out with some mappers and reducers that throw 
+exceptions, to make sure it works as intended.
+</li>
+
+
+  </ol>
+</body></html>

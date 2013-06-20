@@ -1,0 +1,218 @@
+# module Point = struct
+    let x = 3
+    let y = 4
+    let distSquared () = x*x + y*y
+  end;;
+module Point : sig val x : int val y : int val distSquared : unit -> int end
+# x;;
+Error: Unbound value x
+# Point.x;;
+- : int = 3
+# Point.y;;
+- : int = 4
+# Point.distSquared;;
+- : unit -> int = <fun>
+# Point.distSquared ();;
+- : int = 25
+# ^D
+Macintosh /Users/todd [27] -> cd cs131/notes/
+Macintosh.local:/Users/todd/cs131/notes
+Macintosh /Users/todd/cs131/notes [28] -> ocaml
+        Objective Caml version 3.11.1
+
+# #use "points.ml";;
+module Point :
+  sig
+    type point = P of int * int
+    val makePoint : int * int -> point
+    val distSquared : point -> int
+  end
+# let myPoint = makePoint(3,4);;
+Error: Unbound value makePoint
+# let myPoint = Point.makePoint(3,4);;
+val myPoint : Point.point = Point.P (3, 4)
+# Point.distSquared myPoint;;
+- : int = 25
+# let myPoint = Point.makePoint(1,2);;
+val myPoint : Point.point = Point.P (1, 2)
+# type weightInPounds = int;;
+type weightInPounds = int
+# let gain10Pounds x = x+10;;
+val gain10Pounds : int -> int = <fun>
+# let gain10Pounds (x:weightInPounds):weightInPounds = x+10;;
+val gain10Pounds : weightInPounds -> weightInPounds = <fun>
+# gain10Pounds (4+5);;
+- : weightInPounds = 19
+# 
+# type set = Set of int list;;
+type set = Set of int list
+# let emptyset = Set [];;
+val emptyset : set = Set []
+# let addElem e (Set lst) =
+    if List.mem e lst then (Set lst) else Set (e::lst);;
+val addElem : int -> set -> set = <fun>
+# Set [1;1;2];;
+- : set = Set [1; 1; 2]
+# #use "sets.ml";;
+module Set :
+  sig
+    type t = Set of int list
+    val emptyset : t
+    val contains : int -> t -> bool
+    val addElem : int -> t -> t
+  end
+# let mySet = Set.emptyset;;
+val mySet : Set.t = Set.Set []
+# addElem 0 mySet;;
+Error: This expression has type Set.t but an expression was expected of type
+         set
+# Set.addElem 0 mySet;;
+- : Set.t = Set.Set [0]
+# Set.addElem 0 mySet;;
+- : Set.t = Set.Set [0]
+# ^D
+Macintosh /Users/todd/cs131/notes [29] -> ocaml
+        Objective Caml version 3.11.1
+
+# #use "sets.ml";;
+module Set :
+  sig
+    type t = Set of int list
+    val emptyset : t
+    val contains : int -> t -> bool
+    val addElem : int -> t -> t
+  end
+# let myset = Set.Set [1;1;1];;
+val myset : Set.t = Set.Set [1; 1; 1]
+# ^D
+
+Macintosh /Users/todd/cs131/notes [30] -> ocaml
+        Objective Caml version 3.11.1
+
+# #use "sets.ml";;
+module type SET = sig type t val emptyset : t val addElem : int -> t -> t end
+module Set : SET
+# #use "sets.ml";;
+module type SET = sig type t val emptyset : t val addElem : int -> t -> t end
+module Set :
+  sig
+    type t = S of int list
+    val emptyset : t
+    val contains : int -> t -> bool
+    val addElem : int -> t -> t
+  end
+# #use "sets.ml";;
+module type SET = sig type t val emptyset : t val addElem : int -> t -> t end
+module Set : SET
+# Set.S [1;1;1];;
+Error: Unbound constructor Set.S
+# let myset = Set.emptyset;;
+val myset : Set.t = <abstr>
+# let myset2 = Set.addElem 0 myset;;
+val myset2 : Set.t = <abstr>
+# Set.contains;;
+Error: Unbound value Set.contains
+# #use "sets.ml";;
+module type SET =
+  sig
+    type t
+    val emptyset : t
+    val contains : int -> t -> bool
+    val addElem : int -> t -> t
+  end
+module Set : SET
+# let myset = Set.emptyset;;
+val myset : Set.t = <abstr>
+# let myset2 = Set.addElem 0 myset;;
+val myset2 : Set.t = <abstr>
+# Set.contains 0 myset;;
+- : bool = false
+# Set.contains 0 myset2;;
+- : bool = true
+# Set.S [1;1;1];;
+Error: Unbound constructor Set.S
+# #use "sets.ml";;
+module type SET =
+  sig
+    type t
+    val emptyset : t
+    val contains : int -> t -> bool
+    val addElem : int -> t -> t
+  end
+module Set : SET
+# let myset = Set.emptyset;;
+val myset : Set.t = <abstr>
+# let myset2 = Set.addElem 0 myset;;
+val myset2 : Set.t = <abstr>
+# Set.contains 0 myset2;;
+- : bool = true
+# let myset = [];;
+val myset : 'a list = []
+# let myset = [1;2;3];;
+val myset : int list = [1; 2; 3]
+# Set.contains 1 myset;;
+Error: This expression has type int list
+       but an expression was expected of type Set.t
+# let (myset:Set.t) = [1;2;3];;
+Error: This expression has type 'a list
+       but an expression was expected of type Set.t
+# #use "sets.ml";;
+File "sets.ml", line 4, characters 19-20:
+Error: The type constructor t expects 1 argument(s),
+       but is here applied to 0 argument(s)
+# #use "sets.ml";;
+module type SET =
+  sig
+    type 'a t
+    val emptyset : 'a t
+    val contains : 'a -> 'a t -> bool
+    val addElem : 'a -> 'a t -> 'a t
+  end
+module Set : SET
+# let myintset = Set.addElem 0 Set.emptyset;;
+val myintset : int Set.t = <abstr>
+# let mystringset = Set.addElem "hi" Set.emptyset;;
+val mystringset : string Set.t = <abstr>
+# #use "sets.ml";;
+module type SET =
+  sig
+    type 'a t
+    val emptyset : 'a t
+    val contains : 'a -> 'a t -> bool
+    val addElem : 'a -> 'a t -> 'a t
+  end
+File "sets.ml", line 9, characters 17-163:
+Error: Signature mismatch:
+       Modules do not match:
+         sig
+           type 'a t = 'a list
+           val contains : 'a -> 'a list -> bool
+           val addElem : 'a -> 'a list -> 'a list
+         end
+       is not included in
+         SET
+       The field `emptyset' is required but not provided
+# #use "sets.ml";;
+module type SET =
+  sig
+    type 'a t
+    val emptyset : 'a t
+    val contains : 'a -> 'a t -> bool
+    val addElem : 'a -> 'a t -> 'a t
+  end
+File "sets.ml", line 9, characters 17-183:
+Error: Signature mismatch:
+       Modules do not match:
+         sig
+           type 'a t = 'a list
+           val emptyset : int
+           val contains : 'a -> 'a list -> bool
+           val addElem : 'a -> 'a list -> 'a list
+         end
+       is not included in
+         SET
+       Values do not match:
+         val emptyset : int
+       is not included in
+         val emptyset : 'a t
+# 

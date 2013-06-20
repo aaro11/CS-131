@@ -1,0 +1,133 @@
+
+Scoping
+=====
+
+For a given reference to (or use of) a variable, which declaration
+does it refer to?
+
+We keep an *environment*, a map from variable names to their values.
+
+- global declarations
+
+env = []
+   let x = 3;;
+env = [(x,3)]   
+   let double n = n * 2;;
+   let double = (function n -> n*2);;
+env = [(double, <fun>), (x,3)]
+
+- local declarations
+
+env = [(double, <fun>), (x,3)]
+  let y = 3 in
+  env = [(y,3), (double, <fun>), (x,3)]
+    y+x
+env = [(double, <fun>), (x,3)]    
+
+ - function parameters
+   - n in the double function above
+
+env = [(double, (function n -> n*2)), (x,3)]
+   double 5
+     env = [(n, 5), (double, (function n -> n*2)), (x,3)]
+       n * 2
+env = [(double, (function n -> n*2)), (x,3)]
+       
+In all cases above, can generalize x to an arbitrary pattern p.
+
+let (x,y) = (3,4) in ...
+
+
+*Static (lexical) scoping*:
+ - a variable use refers to the nearest enclosing definition of that
+   variable
+ 
+(block structuring)
+env = []
+       let x = 45;;
+env = [(x,45)]       
+       let f = (function y -> x + y);;
+env = [(f, (function y -> x+y, [(x,45)])), (x, 45)]       
+       f 3;;
+       1. grab the lexical (static) environment of f
+       	  [(x,45)]
+       2. add bindings from formals to actuals
+       env = [(y,3), (x,45)]
+       ---> evaluate x+y       
+env = [(f, function y -> x+y), (x, 45)]       
+       let x = 12;;
+env = [(x, 12), (f, function y -> x+y), (x, 45)]       
+       f 3;;
+       - same process as for the first call
+       env = [(y,3),(x, 45)]
+       --> evaluate x+y
+
+
+Another example:
+
+env=[]
+	let add = (function x -> (function y -> x + y))
+env = [add, (<fun>, [])]
+	(add 3) 4
+	1. evaluate (add 3)
+	    evaluate the body of add
+	    env = [(x, 3)]
+	     (function y -> x + y)
+	    that evaluates to
+	      ((function y -> x+y), [(x,3)])
+	2. invoke the above function on 4
+	   env = [(y,4),(x,3)]
+	    evaluate x+y
+	    
+
+----------------
+
+Types
+====
+
+What is a type?
+
+- a set of values, along with operations on those values
+- int is the set of 32-bit integers, with operations +, -, <, ...
+
+- int * bool
+  - pairs of integers and booleans
+    (3, true)
+
+- int list
+  - integer lists
+
+- int -> bool
+  - functions from integers to booleans
+
+Goal of typechecking:  ensure that each value is only ever manipulated
+consistently with its type
+ - dynamically, each operation to be invoked on values of the proper types
+ 
+* Static vs. dynamic typechecking
+  - static typechecking means that each program expression is
+     given a type at compile time
+     - C, C++, Java, ML
+
+  - dynamic typechecking means that at runtime you ensure that
+     a primitive operation (e.g., +, taking the head of a list) is only ever
+     invoked on values of the right type
+     - exactly what our evaluator does
+     - Python, Lisp, Perl, JavaScript, PHP, Ruby,...
+
+     
+  advantages/disadvantages:
+  - static gives early feedback on possible errors
+  - static typechecking is modular
+    - don't need the whole program to give feedback on possible errors
+    - can typecheck a single class in isolation in Java or C++
+    - can typecheck a function independently of its callers
+  - dynamic typechecking is more precise
+    - only signals an error when there really is an error
+    - static is necessarily conservative
+       (if true then 0 else "hi") + 4
+       - in ML, a list is *homogeneous* -- all elements have the same type
+         - but ameliorated by things like tuples and user-defined types
+	   type intorbool = Int of int | Bool of bool
+  - dynamic checking has a run-time cost
+  

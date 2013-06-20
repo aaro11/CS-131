@@ -1,0 +1,153 @@
+Macintosh.local:/Users/todd
+Macintosh /Users/todd [101] -> cd cs131/notes/
+Macintosh.local:/Users/todd/cs131/notes
+Macintosh /Users/todd/cs131/notes [102] -> ocaml
+        Objective Caml version 3.11.1
+
+# let stupid n =
+  match n with
+  0 -> 0
+  | 1 -> 1;;
+Warning P: this pattern-matching is not exhaustive.
+Here is an example of a value that is not matched:
+2
+val stupid : int -> int = <fun>
+# stupid 1;;
+- : int = 1
+# stupid 2;;
+Exception: Match_failure ("", 2, 0).
+# let (x::xs) = [1;2;3];;
+Warning P: this pattern-matching is not exhaustive.
+Here is an example of a value that is not matched:
+[]
+val x : int = 1
+val xs : int list = [2; 3]
+# let (x::xs) = [];;
+Warning P: this pattern-matching is not exhaustive.
+Here is an example of a value that is not matched:
+[]
+Exception: Match_failure ("", 4, -31).
+# List.assoc;;
+- : 'a -> ('a * 'b) list -> 'b = <fun>
+# List.assoc 1 [(1, "hi");(2,"bye")];;
+- : string = "hi"
+# List.assoc 2 [(1, "hi");(2,"bye")];;
+- : string = "bye"
+# List.assoc 0 [(1, "hi");(2,"bye")];;
+Exception: Not_found.
+# raise;;
+- : exn -> 'a = <fun>
+# exception NotFound;;
+exception NotFound
+# NotFound;;
+- : exn = NotFound
+# #use "notes-4-7.ml";;
+exception NotFound
+val assoc : 'a -> ('a * 'b) list -> 'b = <fun>
+# assoc 2 [(1, "hi");(2,"bye")];;
+- : string = "bye"
+# assoc 0 [(1, "hi");(2,"bye")];;
+Exception: NotFound.
+# #use "notes-4-7.ml";;
+exception NotFound
+val assoc : 'a -> ('a * 'b) list -> 'b = <fun>
+File "notes-4-7.ml", line 24, characters 8-15:
+Warning Y: unused variable currVal.
+val addBindingIfNotAlreadyThere :
+  'a -> 'b -> ('a * 'b) list -> ('a * 'b) list = <fun>
+# addBindingIfNotAlreadyThere 0 "hello" [(1, "hi");(2,"bye")];;
+- : (int * string) list = [(0, "hello"); (1, "hi"); (2, "bye")]
+# addBindingIfNotAlreadyThere 2 "hello" [(1, "hi");(2,"bye")];;
+- : (int * string) list = [(1, "hi"); (2, "bye")]
+# #use "notes-4-7.ml";;
+exception NotFound of string
+val assoc : 'a -> ('a * 'b) list -> 'b = <fun>
+File "notes-4-7.ml", line 24, characters 8-15:
+Warning Y: unused variable currVal.
+val addBindingIfNotAlreadyThere :
+  'a -> 'b -> ('a * 'b) list -> ('a * 'b) list = <fun>
+# #use "notes-4-7.ml";;
+exception NotFound of string
+val assoc : 'a -> ('a * 'b) list -> 'b = <fun>
+val addBindingIfNotAlreadyThere :
+  'a -> 'b -> ('a * 'b) list -> ('a * 'b) list = <fun>
+# addBindingIfNotAlreadyThere 0 "hello" [(1, "hi");(2,"bye")];;
+- : (int * string) list = [(0, "hello"); (1, "hi"); (2, "bye")]
+# addBindingIfNotAlreadyThere 2 "hello" [(1, "hi");(2,"bye")];;
+- : (int * string) list = [(1, "hi"); (2, "bye")]
+# #use "notes-4-7.ml";;
+exception NotFound of string
+val assoc : 'a -> ('a * 'b) list -> 'b = <fun>
+File "notes-4-7.ml", line 24, characters 8-15:
+Warning Y: unused variable currVal.
+File "notes-4-7.ml", line 27, characters 6-14:
+Error: The constructor NotFound expects 1 argument(s),
+       but is applied here to 0 argument(s)
+# let x = 3;;
+val x : int = 3
+# x;
+  ;;
+- : int = 3
+# let x = 0 in
+    x + 4;;
+- : int = 4
+# x;;
+- : int = 3
+# x;;
+- : int = 3
+# let x = x+1 in x+1;;
+- : int = 5
+# let y = y+1;;
+Error: Unbound value y
+# let rec y = y+1;;
+Error: This kind of expression is not allowed as right-hand side of `let rec'
+# ^D
+Macintosh /Users/todd/cs131/notes [103] -> ocaml
+        Objective Caml version 3.11.1
+
+# let y = 45;;
+val y : int = 45
+# let f y = y + 3;;
+val f : int -> int = <fun>
+# f y;;
+- : int = 48
+# ^D
+
+Macintosh /Users/todd/cs131/notes [104] -> ocaml
+        Objective Caml version 3.11.1
+
+# let x = 45;;
+val x : int = 45
+# let f y = x + y;;
+val f : int -> int = <fun>
+# f 3;;
+- : int = 48
+# let x = 12;;
+val x : int = 12
+# f 3;;
+- : int = 48
+# x;;
+- : int = 12
+# ^D
+
+Macintosh /Users/todd/cs131/notes [105] -> ocaml
+        Objective Caml version 3.11.1
+
+# let add x y = x+y;;
+val add : int -> int -> int = <fun>
+# let add2 = add 2;;
+val add2 : int -> int = <fun>
+# let addTwo = add 2;;
+val addTwo : int -> int = <fun>
+# addTwo 8;;
+- : int = 10
+# let x = 12;;
+val x : int = 12
+# addTwo 8;;
+- : int = 10
+# let y = 0;;
+val y : int = 0
+# addTwo 8;;
+- : int = 10
+# let y = 0;;
+val y : int = 0

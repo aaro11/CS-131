@@ -1,0 +1,30 @@
+
+functional programming is mathematics
+
+object-oriented programming is communication
+
+logic programming is search
+
+-----------
+
+a *term*:
+
+- constants are terms
+  - 3
+  - *atom*
+    - an identifier starting with a lowercase letter
+    - kind of like constructors in user-defined type in ML
+    
+    type day = Mon | Tues | Wed
+    
+- variables are terms
+  - an identifier starting with an uppercase letter
+
+- compound term:
+  - an atom followed by a parenthesized list of terms
+
+  parent(adam, bob)
+
+  parent(X, bob)
+
+  

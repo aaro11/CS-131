@@ -1,0 +1,393 @@
+bash-3.2$ pwd
+/Users/todd/work/course/cs131/2011/notes
+bash-3.2$ ocaml
+        Objective Caml version 3.11.1
+
+# #use "notes-4-5.ml";;
+val square : int -> int = <fun>
+# let y = 3;;
+val y : int = 3
+# square 4;;
+- : int = 16
+# let myOtherSquare = square;;
+val myOtherSquare : int -> int = <fun>
+# myOtherSquare 4;;
+- : int = 16
+# #use "notes-4-5.ml";;
+val square : int -> int = <fun>
+val y : int = 4
+val square2 : int -> int = <fun>
+# square2 4;;
+- : int = 16
+# (function x -> x * x) 5;;
+- : int = 25
+# #use "notes-4-5.ml";;
+val square : int -> int = <fun>
+val y : int = 4
+val square2 : int -> int = <fun>
+val twice : ('a -> 'a) * 'a -> 'a = <fun>
+# twice (square, 3);;
+- : int = 81
+# twice (function x -> x * x, 3);;
+Characters 6-30:
+  twice (function x -> x * x, 3);;
+        ^^^^^^^^^^^^^^^^^^^^^^^^
+Error: This expression should not be a function, the expected type is
+('a -> 'a) * 'a
+# twice ((function x -> x*x), 3);;
+- : int = 81
+# !true;;
+Characters 1-5:
+  !true;;
+   ^^^^
+Error: This expression has type bool but an expression was expected of type
+         'a ref
+# twice ((function b -> if b then false else true), false);; 
+- : bool = false
+# twice;;
+- : ('a -> 'a) * 'a -> 'a = <fun>
+# #use "notes-4-5.ml";;
+val square : int -> int = <fun>
+val y : int = 4
+val square2 : int -> int = <fun>
+val twice : ('a -> 'a) * 'a -> 'a = <fun>
+val betterTwice : ('a -> 'a) -> 'a -> 'a = <fun>
+# let toThe4thPower = betterTwice square;;
+val toThe4thPower : int -> int = <fun>
+# toThe4thPower 3;;
+- : int = 81
+# (betterTwice square) 3;;
+- : int = 81
+# betterTwice square 3;;
+- : int = 81
+# #use "notes-4-5.ml";;
+val square : int -> int = <fun>
+val y : int = 4
+val square2 : int -> int = <fun>
+val twice : ('a -> 'a) * 'a -> 'a = <fun>
+val betterTwice : ('a -> 'a) -> 'a -> 'a = <fun>
+val betterTwice2 : ('a -> 'a) -> 'a -> 'a = <fun>
+val betterTwice3 : ('a -> 'a) -> 'a -> 'a = <fun>
+val betterTwice4 : ('a -> 'a) -> 'a -> 'a = <fun>
+# twice (square, 4);;
+- : int = 256
+# twice square;;
+Characters 6-12:
+  twice square;;
+        ^^^^^^
+Error: This expression has type int -> int
+       but an expression was expected of type ('a -> 'a) * 'a
+# betterTwice4 square;;
+- : int -> int = <fun>
+# betterTwice4 square 4;;
+- : int = 256
+# betterTwice square;;
+- : int -> int = <fun>
+# let fourthPower = betterTwice square;;
+val fourthPower : int -> int = <fun>
+# f;;
+Characters 0-1:
+  f;;
+  ^
+Error: Unbound value f
+# fourthPower 4;;
+- : int = 256
+# #use "notes-4-5.ml";;
+File "notes-4-5.ml", line 32, characters 0-3:
+Error: Syntax error
+# #use "notes-4-5.ml";;
+val square : int -> int = <fun>
+val y : int = 4
+val square2 : int -> int = <fun>
+val twice : ('a -> 'a) * 'a -> 'a = <fun>
+val betterTwice : ('a -> 'a) -> 'a -> 'a = <fun>
+val betterTwice2 : ('a -> 'a) -> 'a -> 'a = <fun>
+val betterTwice3 : ('a -> 'a) -> 'a -> 'a = <fun>
+val betterTwice4 : ('a -> 'a) -> 'a -> 'a = <fun>
+val concat : 'a list -> ('a list -> 'a list) = <fun>
+# (concat [1;2;3]) [4;5;6];;
+- : int list = [1; 2; 3; 4; 5; 6]
+# let concat123 = concat [1;2;3];;
+val concat123 : int list -> int list = <fun>
+# concat123 [4;5;6];;
+- : int list = [1; 2; 3; 4; 5; 6]
+# concat123 [7;8];;
+- : int list = [1; 2; 3; 7; 8]
+# betterTwice betterTwice;;
+- : ('_a -> '_a) -> '_a -> '_a = <fun>
+# betterTwice square 3;;
+- : int = 81
+# betterTwice square 2;;
+- : int = 16
+# betterTwice betterTwice square 2;;
+- : int = 65536
+# betterTwice betterTwice betterTwice square 2;;
+- : int = 0
+# let double x = x * 2;;
+val double : int -> int = <fun>
+# betterTwice double 2;;
+- : int = 8
+# betterTwice betterTwice double 2;;
+- : int = 32
+# betterTwice betterTwice betterTwice double 2;;
+- : int = 131072
+# [double, twice];;
+- : ((int -> int) * (('a -> 'a) * 'a -> 'a)) list = [(<fun>, <fun>)]
+# [double; square];;
+- : (int -> int) list = [<fun>; <fun>]
+# (function x -> x*2) 5;;
+- : int = 10
+# #use "notes-4-5.ml";;
+val square : int -> int = <fun>
+val y : int = 4
+val square2 : int -> int = <fun>
+val twice : ('a -> 'a) * 'a -> 'a = <fun>
+val betterTwice : ('a -> 'a) -> 'a -> 'a = <fun>
+val betterTwice2 : ('a -> 'a) -> 'a -> 'a = <fun>
+val betterTwice3 : ('a -> 'a) -> 'a -> 'a = <fun>
+val betterTwice4 : ('a -> 'a) -> 'a -> 'a = <fun>
+val concat : 'a list -> 'a list -> 'a list = <fun>
+val incLst : int list -> int list = <fun>
+val swapLst : ('a * 'b) list -> ('b * 'a) list = <fun>
+# incLst [1;2;3];;
+- : int list = [2; 3; 4]
+# swapLst [(1, "1");(2, "2")];;
+- : (string * int) list = [("1", 1); ("2", 2)]
+# List.map;;
+- : ('a -> 'b) -> 'a list -> 'b list = <fun>
+# #use "notes-4-5.ml";;
+val square : int -> int = <fun>
+val y : int = 4
+val square2 : int -> int = <fun>
+val twice : ('a -> 'a) * 'a -> 'a = <fun>
+val betterTwice : ('a -> 'a) -> 'a -> 'a = <fun>
+val betterTwice2 : ('a -> 'a) -> 'a -> 'a = <fun>
+val betterTwice3 : ('a -> 'a) -> 'a -> 'a = <fun>
+val betterTwice4 : ('a -> 'a) -> 'a -> 'a = <fun>
+val concat : 'a list -> 'a list -> 'a list = <fun>
+val incLst : int list -> int list = <fun>
+val swapLst : ('a * 'b) list -> ('b * 'a) list = <fun>
+val incLst2 : int list -> int list = <fun>
+val swapLst2 : ('a * 'b) list -> ('b * 'a) list = <fun>
+# incLst2 [1;2;3];;
+- : int list = [2; 3; 4]
+# #use "notes-4-5.ml";;
+val square : int -> int = <fun>
+val y : int = 4
+val square2 : int -> int = <fun>
+val twice : ('a -> 'a) * 'a -> 'a = <fun>
+val betterTwice : ('a -> 'a) -> 'a -> 'a = <fun>
+val betterTwice2 : ('a -> 'a) -> 'a -> 'a = <fun>
+val betterTwice3 : ('a -> 'a) -> 'a -> 'a = <fun>
+val betterTwice4 : ('a -> 'a) -> 'a -> 'a = <fun>
+val concat : 'a list -> 'a list -> 'a list = <fun>
+val incLst : int list -> int list = <fun>
+val swapLst : ('a * 'b) list -> ('b * 'a) list = <fun>
+val incLst2 : int list -> int list = <fun>
+val swapLst2 : ('a * 'b) list -> ('b * 'a) list = <fun>
+val map : ('a -> 'b) -> 'a list -> 'b list = <fun>
+# map (function x -> x+1) [1;2;3];;
+- : int list = [2; 3; 4]
+# let incLst = map (function x -> x+1);;
+val incLst : int list -> int list = <fun>
+# incLst [1;2;3];;
+- : int list = [2; 3; 4]
+# let inc x = x+1;;
+val inc : int -> int = <fun>
+# map inc [1;2;3];;
+- : int list = [2; 3; 4]
+# map (function x -> x+1) [1;2;3];;
+- : int list = [2; 3; 4]
+# List.map;;
+- : ('a -> 'b) -> 'a list -> 'b list = <fun>
+# #use "notes-4-5.ml";;
+val square : int -> int = <fun>
+val y : int = 4
+val square2 : int -> int = <fun>
+val twice : ('a -> 'a) * 'a -> 'a = <fun>
+val betterTwice : ('a -> 'a) -> 'a -> 'a = <fun>
+val betterTwice2 : ('a -> 'a) -> 'a -> 'a = <fun>
+val betterTwice3 : ('a -> 'a) -> 'a -> 'a = <fun>
+val betterTwice4 : ('a -> 'a) -> 'a -> 'a = <fun>
+val concat : 'a list -> 'a list -> 'a list = <fun>
+val incLst : int list -> int list = <fun>
+val swapLst : ('a * 'b) list -> ('b * 'a) list = <fun>
+val incLst2 : int list -> int list = <fun>
+val swapLst2 : ('a * 'b) list -> ('b * 'a) list = <fun>
+val incLst3 : int list -> int list = <fun>
+val map : ('a -> 'b) -> 'a list -> 'b list = <fun>
+val expList : float -> float list -> float list = <fun>
+# expList 2. [1.; 2.; 3.];;
+- : float list = [1.; 4.; 9.]
+# let squareList = expList 2.;;
+val squareList : float list -> float list = <fun>
+# squareList [1.;2.;3.];;
+- : float list = [1.; 4.; 9.]
+# List.filter;;
+- : ('a -> bool) -> 'a list -> 'a list = <fun>
+# List.filter (function x -> x > 3) [4;2;5;3;0];;
+- : int list = [4; 5]
+# List.fold_right;;
+- : ('a -> 'b -> 'b) -> 'a list -> 'b -> 'b = <fun>
+# List.fold_right;;
+- : ('a -> 'b -> 'b) -> 'a list -> 'b -> 'b = <fun>
+# #use "notes-4-5.ml";;
+val square : int -> int = <fun>
+val y : int = 4
+val square2 : int -> int = <fun>
+val twice : ('a -> 'a) * 'a -> 'a = <fun>
+val betterTwice : ('a -> 'a) -> 'a -> 'a = <fun>
+val betterTwice2 : ('a -> 'a) -> 'a -> 'a = <fun>
+val betterTwice3 : ('a -> 'a) -> 'a -> 'a = <fun>
+val betterTwice4 : ('a -> 'a) -> 'a -> 'a = <fun>
+val concat : 'a list -> 'a list -> 'a list = <fun>
+val incLst : int list -> int list = <fun>
+val swapLst : ('a * 'b) list -> ('b * 'a) list = <fun>
+val incLst2 : int list -> int list = <fun>
+val swapLst2 : ('a * 'b) list -> ('b * 'a) list = <fun>
+val incLst3 : int list -> int list = <fun>
+val map : ('a -> 'b) -> 'a list -> 'b list = <fun>
+val expList : float -> float list -> float list = <fun>
+val sumList : int list -> int = <fun>
+val sumList2 : int list -> int = <fun>
+val fold_right : ('a -> 'b -> 'b) -> 'a list -> 'b -> 'b = <fun>
+# sumList2 [1;2;3];;
+- : int = 6
+# fold_right (fun x y -> x+y) [1;2;3] 0;;
+- : int = 6
+# +;;
+Characters 0-1:
+  +;;
+  ^
+Error: Syntax error
+# fold_right + [1;2;3] 0;;
+Characters 0-10:
+  fold_right + [1;2;3] 0;;
+  ^^^^^^^^^^
+Error: This expression has type ('a -> 'b -> 'b) -> 'a list -> 'b -> 'b
+       but an expression was expected of type int
+# (+);;
+- : int -> int -> int = <fun>
+# (+) 3 4;;
+- : int = 7
+# let incLst l = fold_right (+) l 0;;
+val incLst : int list -> int = <fun>
+# (*);;
+Characters 0-3:
+  (*);;
+  ^^^
+Warning C: this is the start of a comment.
+* *)
+  ;;
+Characters 9-11:
+  ;;
+  ^^
+Error: Syntax error
+# ( * );;
+- : int -> int -> int = <fun>
+# #use "notes-4-5.ml";;
+File "notes-4-5.ml", line 107, characters 19-21:
+Error: Syntax error
+# #use "notes-4-5.ml";;
+File "notes-4-5.ml", line 107, characters 20-22:
+Error: Syntax error
+# (::);;
+Characters 4-6:
+  (::);;
+      ^^
+Error: Syntax error
+# ::;;
+Characters 0-2:
+  ::;;
+  ^^
+Error: Syntax error
+# #use "notes-4-5.ml";;
+val square : int -> int = <fun>
+val y : int = 4
+val square2 : int -> int = <fun>
+val twice : ('a -> 'a) * 'a -> 'a = <fun>
+val betterTwice : ('a -> 'a) -> 'a -> 'a = <fun>
+val betterTwice2 : ('a -> 'a) -> 'a -> 'a = <fun>
+val betterTwice3 : ('a -> 'a) -> 'a -> 'a = <fun>
+val betterTwice4 : ('a -> 'a) -> 'a -> 'a = <fun>
+val concat : 'a list -> 'a list -> 'a list = <fun>
+val incLst : int list -> int list = <fun>
+val swapLst : ('a * 'b) list -> ('b * 'a) list = <fun>
+val incLst2 : int list -> int list = <fun>
+val swapLst2 : ('a * 'b) list -> ('b * 'a) list = <fun>
+val incLst3 : int list -> int list = <fun>
+val map : ('a -> 'b) -> 'a list -> 'b list = <fun>
+val expList : float -> float list -> float list = <fun>
+val sumList : int list -> int = <fun>
+val sumList2 : int list -> int = <fun>
+val sumList3 : int list -> int = <fun>
+val fold_right : ('a -> 'b -> 'b) -> 'a list -> 'b -> 'b = <fun>
+val concat : 'a list -> 'a list -> 'a list = <fun>
+# concat [1;2;3] [4;5;6];;
+- : int list = [1; 2; 3; 4; 5; 6]
+# #use "notes-4-5.ml";;
+val square : int -> int = <fun>
+val y : int = 4
+val square2 : int -> int = <fun>
+val twice : ('a -> 'a) * 'a -> 'a = <fun>
+val betterTwice : ('a -> 'a) -> 'a -> 'a = <fun>
+val betterTwice2 : ('a -> 'a) -> 'a -> 'a = <fun>
+val betterTwice3 : ('a -> 'a) -> 'a -> 'a = <fun>
+val betterTwice4 : ('a -> 'a) -> 'a -> 'a = <fun>
+val concat : 'a list -> 'a list -> 'a list = <fun>
+val incLst : int list -> int list = <fun>
+val swapLst : ('a * 'b) list -> ('b * 'a) list = <fun>
+val incLst2 : int list -> int list = <fun>
+val swapLst2 : ('a * 'b) list -> ('b * 'a) list = <fun>
+val incLst3 : int list -> int list = <fun>
+val map : ('a -> 'b) -> 'a list -> 'b list = <fun>
+val expList : float -> float list -> float list = <fun>
+val sumList : int list -> int = <fun>
+val sumList2 : int list -> int = <fun>
+val sumList3 : int list -> int = <fun>
+val fold_right : ('a -> 'b -> 'b) -> 'a list -> 'b -> 'b = <fun>
+val concat : 'a list -> 'a list -> 'a list = <fun>
+val dupList : 'a list -> 'a list = <fun>
+# dupList [1;2;3];;
+- : int list = [1; 1; 2; 2; 3; 3]
+# List.fold_left;;
+- : ('a -> 'b -> 'a) -> 'a -> 'b list -> 'a = <fun>
+# List.fold_left (+) [1;2;3;4] 0;;
+Characters 19-28:
+  List.fold_left (+) [1;2;3;4] 0;;
+                     ^^^^^^^^^
+Error: This expression has type 'a list
+       but an expression was expected of type int
+# List.fold_left (+) 0 [1;2;3;4];;
+- : int = 10
+# List.fold_right (-) [1;2;3;4] 0;;
+- : int = -2
+# List.fold_left (-) 0 [1;2;3;4];;
+- : int = -10
+# #use "notes-4-5.ml";;
+val square : int -> int = <fun>
+val y : int = 4
+val square2 : int -> int = <fun>
+val twice : ('a -> 'a) * 'a -> 'a = <fun>
+val betterTwice : ('a -> 'a) -> 'a -> 'a = <fun>
+val betterTwice2 : ('a -> 'a) -> 'a -> 'a = <fun>
+val betterTwice3 : ('a -> 'a) -> 'a -> 'a = <fun>
+val betterTwice4 : ('a -> 'a) -> 'a -> 'a = <fun>
+val concat : 'a list -> 'a list -> 'a list = <fun>
+val incLst : int list -> int list = <fun>
+val swapLst : ('a * 'b) list -> ('b * 'a) list = <fun>
+val incLst2 : int list -> int list = <fun>
+val swapLst2 : ('a * 'b) list -> ('b * 'a) list = <fun>
+val incLst3 : int list -> int list = <fun>
+val map : ('a -> 'b) -> 'a list -> 'b list = <fun>
+val expList : float -> float list -> float list = <fun>
+val sumList : int list -> int = <fun>
+val sumList2 : int list -> int = <fun>
+val sumList3 : int list -> int = <fun>
+val fold_right : ('a -> 'b -> 'b) -> 'a list -> 'b -> 'b = <fun>
+val concat : 'a list -> 'a list -> 'a list = <fun>
+val dupList : 'a list -> 'a list = <fun>
+val maxList : int list -> int = <fun>
+# maxList [1;2;4;5;2;4];;
+- : int = 5
+# 

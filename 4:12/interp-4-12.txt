@@ -1,0 +1,76 @@
+
+# let x = 3;;
+val x : int = 3
+# x;;
+- : int = 3
+# let double n = n * 2;;
+val double : int -> int = <fun>
+# double;;
+- : int -> int = <fun>
+# n;;
+Error: Unbound value n
+# let x = 45;;
+val x : int = 45
+# let f = (function y -> x+y);;
+val f : int -> int = <fun>
+# f 3;;
+- : int = 48
+# let x = 12;;
+val x : int = 12
+# f 3;;
+- : int = 48
+# let x = "hello";;
+val x : string = "hello"
+# f 3;;
+- : int = 48
+
+# #use "mocaml.ml";;
+type mltype = IntType | BoolType
+type mlexp =
+    Int of int
+  | Bool of bool
+  | Not of mlexp
+  | Var of string
+  | Let of (string * mltype * mlexp) * mlexp
+type mlval = IntVal of int | BoolVal of bool
+exception TypeError of string
+val tc : mlexp -> (string * mltype) list -> mltype = <fun>
+exception EvalError
+val eval : mlexp -> (string * mlval) list -> mlval = <fun>
+# let myexpr = Not (Let ("x", BoolType, Bool false), Not (Var "x"));; Error: The constructor Let expects 2 argument(s),
+       but is applied here to 3 argument(s)
+# let myexpr = Not (Let (("x", BoolType, Bool false), Not (Var "x")));; 
+val myexpr : mlexp = Not (Let (("x", BoolType, Bool false), Not (Var "x")))
+# not (let (x:bool) = false in (not x));;
+- : bool = false
+# tc myexpr [];;- : mltype = BoolType
+# eval myexpr [];;
+- : mlval = BoolVal false
+# let myexpr = Not (Let (("x", IntType, Bool false), Not (Var "x")));; 
+val myexpr : mlexp = Not (Let (("x", IntType, Bool false), Not (Var "x")))
+# eval myexpr [];;- : mlval = BoolVal false
+# tc myexpr [];;Exception: TypeError "variable and value don't agree on the type".
+# let myexpr = Not (Let (("x", IntType, Int 3), Not (Var "x")));; val myexpr : mlexp = Not (Let (("x", IntType, Int 3), Not (Var "x")))
+# tc myexpr [];;
+Exception: TypeError "can only negate booleans".
+# eval myexpr [];;
+Exception: EvalError.
+# let myexpr = Not (Let (("x", IntType, Bool false), Not (Var "x")));; 
+val myexpr : mlexp = Not (Let (("x", IntType, Bool false), Not (Var "x")))
+# tc myexpr [];;Exception: TypeError "variable and value don't agree on the type".
+# eval myexpr [];;- : mlval = BoolVal false
+# (if true then 0 else "hi") + 4;;
+Error: This expression has type string but an expression was expected of type
+         int
+# let add x y = x+y;;
+val add : int -> int -> int = <fun>
+# [1;2;3];;
+- : int list = [1; 2; 3]
+# [(1,true); (2,false)];;
+- : (int * bool) list = [(1, true); (2, false)]
+# type intorbool = Int of int | Bool of bool;;
+type intorbool = Int of int | Bool of bool
+# let mylist = [Int 3; Bool true; Bool false]
+  ;;
+val mylist : intorbool list = [Int 3; Bool true; Bool false]
+# ^D

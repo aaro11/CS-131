@@ -1,0 +1,306 @@
+bash-3.2$ ocaml
+        Objective Caml version 3.11.1
+
+# #use "notes-3-29.ml";;
+val fact : int -> int = <fun>
+val fact2 : int -> int = <fun>
+val sumList : int list -> int = <fun>
+val concat : 'a list * 'a list -> 'a list = <fun>
+val sumConsecutive : int list -> int list = <fun>
+val add : int * int -> int = <fun>
+val three : unit -> int = <fun>
+File "notes-3-29.ml", line 39, characters 2-80:
+Warning P: this pattern-matching is not exhaustive.
+Here is an example of a value that is not matched:
+(_::_, [])
+val zip : 'a list * 'b list -> ('a * 'b) list = <fun>
+# #use "notes-3-29.ml";;
+val fact : int -> int = <fun>
+val fact2 : int -> int = <fun>
+val sumList : int list -> int = <fun>
+val concat : 'a list * 'a list -> 'a list = <fun>
+val sumConsecutive : int list -> int list = <fun>
+val add : int * int -> int = <fun>
+val three : unit -> int = <fun>
+File "notes-3-29.ml", line 39, characters 2-80:
+Warning P: this pattern-matching is not exhaustive.
+Here is an example of a value that is not matched:
+(_::_, [])
+val zip : 'a list * 'b list -> ('a * 'b) list = <fun>
+# #use "notes-3-29.ml";;
+val fact : int -> int = <fun>
+val fact2 : int -> int = <fun>
+val sumList : int list -> int = <fun>
+val concat : 'a list * 'a list -> 'a list = <fun>
+val sumConsecutive : int list -> int list = <fun>
+val add : int * int -> int = <fun>
+val three : unit -> int = <fun>
+File "notes-3-29.ml", line 39, characters 2-80:
+Warning P: this pattern-matching is not exhaustive.
+Here is an example of a value that is not matched:
+(_::_, [])
+val zip : 'a list * 'b list -> ('a * 'b) list = <fun>
+# #use "notes-3-29.ml";;
+val fact : int -> int = <fun>
+val fact2 : int -> int = <fun>
+File "notes-3-29.ml", line 18, characters 19-31:
+Error: This expression has type float but an expression was expected of type
+         int
+# #use "notes-3-29.ml";;
+val fact : int -> int = <fun>
+val fact2 : int -> int = <fun>
+val sumList : int list -> int = <fun>
+val concat : 'a list * 'a list -> 'a list = <fun>
+val sumConsecutive : int list -> int list = <fun>
+val add : int * int -> int = <fun>
+val three : unit -> int = <fun>
+File "notes-3-29.ml", line 39, characters 2-80:
+Warning P: this pattern-matching is not exhaustive.
+Here is an example of a value that is not matched:
+(_::_, [])
+val zip : 'a list * 'b list -> ('a * 'b) list = <fun>
+# concat([1;2;3], ["hi"; "bye"]);;
+- : int list = [1; 2; 3; 4; 5; 6]
+# concat([1;2;3], ["hi"; "bye"]);;
+Characters 6-30:
+  concat([1;2;3], ["hi"; "bye"]);;
+        ^^^^^^^^^^^^^^^^^^^^^^^^
+Error: This expression has type int list * string list
+       but an expression was expected of type int list * int list
+# #use "notes-3-31.ml";;
+File "notes-3-31.ml", line 6, characters 6-11:
+Warning U: this match case is unused.
+val contains : 'a * 'b list -> bool = <fun>
+# contains (1, [1]);;
+- : bool = true
+# contains (1, [2]);;
+- : bool = true
+# #use "notes-3-31.ml";;
+File "notes-3-31.ml", line 7, characters 6-11:
+Warning U: this match case is unused.
+val contains : 'a * 'b list -> bool = <fun>
+File "notes-3-31.ml", line 12, characters 10-11:
+Error: Variable e is bound several times in this matching
+# #use "notes-3-31.ml";;
+File "notes-3-31.ml", line 7, characters 6-11:
+Warning U: this match case is unused.
+val badcontains : 'a * 'b list -> bool = <fun>
+val contains : 'a * 'a list -> bool = <fun>
+val contains2 : 'a * 'a list -> bool = <fun>
+# isFirst;;
+Characters 0-7:
+  isFirst;;
+  ^^^^^^^
+Error: Unbound value isFirst
+# #use "notes-3-31.ml";;
+File "notes-3-31.ml", line 7, characters 6-11:
+Warning U: this match case is unused.
+val badcontains : 'a * 'b list -> bool = <fun>
+val contains : 'a * 'a list -> bool = <fun>
+val contains2 : 'a * 'a list -> bool = <fun>
+val unzip : ('a * 'b) list -> 'a list * 'b list = <fun>
+# unzip [(1,"a");(2,"b");(3,"c")];;
+- : int list * string list = ([1; 2; 3], ["a"; "b"; "c"])
+# #use "notes-3-31.ml";;
+File "notes-3-31.ml", line 7, characters 6-11:
+Warning U: this match case is unused.
+val badcontains : 'a * 'b list -> bool = <fun>
+val contains : 'a * 'a list -> bool = <fun>
+val contains2 : 'a * 'a list -> bool = <fun>
+val unzip : ('a * 'b) list -> 'a list * 'b list = <fun>
+type sign = Pos | Neg | Zero
+# Pos=Neg;;
+- : bool = false
+# Pos=Pos;;
+- : bool = true
+# Pos;;
+- : sign = Pos
+# #use "notes-3-31.ml";;
+File "notes-3-31.ml", line 7, characters 6-11:
+Warning U: this match case is unused.
+val badcontains : 'a * 'b list -> bool = <fun>
+val contains : 'a * 'a list -> bool = <fun>
+val contains2 : 'a * 'a list -> bool = <fun>
+val unzip : ('a * 'b) list -> 'a list * 'b list = <fun>
+type sign = Pos | Neg | Zero
+val signOf : int -> sign = <fun>
+# signOf 34;;
+- : sign = Pos
+# signOf -34;;
+Characters 0-6:
+  signOf -34;;
+  ^^^^^^
+Error: This expression has type int -> sign
+       but an expression was expected of type int
+# signOf;;
+- : int -> sign = <fun>
+# signOf (-34);;
+- : sign = Neg
+# #use "notes-3-31.ml";;
+File "notes-3-31.ml", line 7, characters 6-11:
+Warning U: this match case is unused.
+val badcontains : 'a * 'b list -> bool = <fun>
+val contains : 'a * 'a list -> bool = <fun>
+val contains2 : 'a * 'a list -> bool = <fun>
+val unzip : ('a * 'b) list -> 'a list * 'b list = <fun>
+type sign = Pos | Neg | Zero
+val signOf : int -> sign = <fun>
+val signToInt : sign -> int = <fun>
+# signToInt Pos;;
+- : int = 1
+# signToInt (signOf 34);;
+- : int = 1
+# #use "notes-3-31.ml";;
+File "notes-3-31.ml", line 7, characters 6-11:
+Warning U: this match case is unused.
+val badcontains : 'a * 'b list -> bool = <fun>
+val contains : 'a * 'a list -> bool = <fun>
+val contains2 : 'a * 'a list -> bool = <fun>
+val unzip : ('a * 'b) list -> 'a list * 'b list = <fun>
+type sign = Pos | Neg | Zero
+val signOf : int -> sign = <fun>
+val signToInt : sign -> int = <fun>
+type shape = Square of float | Triangle of float * float
+# Square;;
+Characters 0-6:
+  Square;;
+  ^^^^^^
+Error: The constructor Square expects 1 argument(s),
+       but is applied here to 0 argument(s)
+# Square 3.4;;
+- : shape = Square 3.4
+# Triangle 3.4;;
+Characters 0-12:
+  Triangle 3.4;;
+  ^^^^^^^^^^^^
+Error: The constructor Triangle expects 2 argument(s),
+       but is applied here to 1 argument(s)
+# Triangle (1.2, 3.4);;
+- : shape = Triangle (1.2, 3.4)
+# #use "notes-3-31.ml";;
+File "notes-3-31.ml", line 7, characters 6-11:
+Warning U: this match case is unused.
+val badcontains : 'a * 'b list -> bool = <fun>
+val contains : 'a * 'a list -> bool = <fun>
+val contains2 : 'a * 'a list -> bool = <fun>
+val unzip : ('a * 'b) list -> 'a list * 'b list = <fun>
+type sign = Pos | Neg | Zero
+val signOf : int -> sign = <fun>
+val signToInt : sign -> int = <fun>
+type shape = Square of float | Triangle of float * float
+val area : shape -> float = <fun>
+# area (Square 3.4);;
+- : float = 11.5599999999999987
+# area (Triangle(1.2, 3.4));;
+- : float = 2.04
+# area 3.4;;
+Characters 5-8:
+  area 3.4;;
+       ^^^
+Error: This expression has type float but an expression was expected of type
+         shape
+# #use "notes-3-31.ml";;
+File "notes-3-31.ml", line 7, characters 6-11:
+Warning U: this match case is unused.
+val badcontains : 'a * 'b list -> bool = <fun>
+val contains : 'a * 'a list -> bool = <fun>
+val contains2 : 'a * 'a list -> bool = <fun>
+val unzip : ('a * 'b) list -> 'a list * 'b list = <fun>
+type sign = Pos | Neg | Zero
+val signOf : int -> sign = <fun>
+val signToInt : sign -> int = <fun>
+type shape = Square of float | Triangle of float * float
+type shape2 = Square of float | Triangle of float * float
+val area : shape2 -> float = <fun>
+# #use "notes-3-31.ml";;
+File "notes-3-31.ml", line 7, characters 6-11:
+Warning U: this match case is unused.
+val badcontains : 'a * 'b list -> bool = <fun>
+val contains : 'a * 'a list -> bool = <fun>
+val contains2 : 'a * 'a list -> bool = <fun>
+val unzip : ('a * 'b) list -> 'a list * 'b list = <fun>
+type sign = Pos | Neg | Zero
+val signOf : int -> sign = <fun>
+val signToInt : sign -> int = <fun>
+type shape = Square of float | Triangle of float * float
+val area : shape -> float = <fun>
+type intList = Empty | Cons of int * intList
+val sumList : intList -> int = <fun>
+# sumList (Cons(1,Cons(2,Cons(3,Empty))));;
+- : int = 6
+# #use "notes-3-31.ml";;
+File "notes-3-31.ml", line 7, characters 6-11:
+Warning U: this match case is unused.
+val badcontains : 'a * 'b list -> bool = <fun>
+val contains : 'a * 'a list -> bool = <fun>
+val contains2 : 'a * 'a list -> bool = <fun>
+val unzip : ('a * 'b) list -> 'a list * 'b list = <fun>
+type sign = Pos | Neg | Zero
+val signOf : int -> sign = <fun>
+val signToInt : sign -> int = <fun>
+type shape = Square of float | Triangle of float * float
+val area : shape -> float = <fun>
+type intList = Empty | Cons of int * intList
+val sumList : intList -> int = <fun>
+type intTree = Leaf | Internal of int * intTree * intTree
+val size : intTree -> int = <fun>
+# let myTree = Internal(1, Internal(2, Leaf, Leaf), Internal(45, Leaf, Leaf));;
+val myTree : intTree =
+  Internal (1, Internal (2, Leaf, Leaf), Internal (45, Leaf, Leaf))
+# size myTree;;
+- : int = 3
+# #use "notes-3-31.ml";;
+File "notes-3-31.ml", line 7, characters 6-11:
+Warning U: this match case is unused.
+val badcontains : 'a * 'b list -> bool = <fun>
+val contains : 'a * 'a list -> bool = <fun>
+val contains2 : 'a * 'a list -> bool = <fun>
+val unzip : ('a * 'b) list -> 'a list * 'b list = <fun>
+type sign = Pos | Neg | Zero
+val signOf : int -> sign = <fun>
+val signToInt : sign -> int = <fun>
+type shape = Square of float | Triangle of float * float
+val area : shape -> float = <fun>
+type 'a myList = Empty | Cons of 'a * 'a myList
+val sumList : int myList -> int = <fun>
+type intTree = Leaf | Internal of int * intTree * intTree
+val size : intTree -> int = <fun>
+# Some 34;;
+- : int option = Some 34
+# None;;
+- : 'a option = None
+# #use "notes-3-31.ml";;
+File "notes-3-31.ml", line 7, characters 6-11:
+Warning U: this match case is unused.
+val badcontains : 'a * 'b list -> bool = <fun>
+val contains : 'a * 'a list -> bool = <fun>
+val contains2 : 'a * 'a list -> bool = <fun>
+val unzip : ('a * 'b) list -> 'a list * 'b list = <fun>
+type sign = Pos | Neg | Zero
+val signOf : int -> sign = <fun>
+val signToInt : sign -> int = <fun>
+type shape = Square of float | Triangle of float * float
+val area : shape -> float = <fun>
+type 'a myList = Empty | Cons of 'a * 'a myList
+val sumList : int myList -> int = <fun>
+type intTree = Leaf | Internal of int * intTree * intTree
+val size : intTree -> int = <fun>
+type 'a option = None | Some of 'a
+val sqrt : float -> float option = <fun>
+# sqrt 3.4;;
+- : float option = Some 1.
+# sqrt (-1.0);;
+- : float option = None
+# let myNum = sqrt (-1.0);;
+val myNum : float option = None
+# myNum + 1.2;;
+Characters 0-5:
+  myNum + 1.2;;
+  ^^^^^
+Error: This expression has type float option
+       but an expression was expected of type int
+# match myNum with
+  None -> 0.
+  | Some f -> f;;
+- : float = 0.
+# 

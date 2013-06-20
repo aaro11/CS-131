@@ -1,0 +1,90 @@
+
+Installing OCaml
+----------------
+
+We'll be using Objective Caml (OCaml). The OCaml interpreter is
+already installed on the SEASNet Unix machines at
+/usr/local/bin/ocaml. You can also download OCaml yourself
+for various platforms here:
+
+http://caml.inria.fr/download.en.html
+
+
+Running OCaml in a UNIX environment
+---------------------------------
+
+To run ocaml from a directory of your own choosing it is best to use
+the PATH environmental variable.  Once ocaml is in your path, the
+interpreter can be run simply by typing "ocaml" in a shell.  First you
+should determine whether ocaml is already visible in your path via the
+following command:
+
+which ocaml
+
+If this command returns "/usr/local/bin/ocaml", then you're all set.
+
+If not, then determine what shell you are currently running with the
+following command:
+
+echo $SHELL
+
+If you are running C Shell (csh or tcsh) then you can update PATH from
+the command line with:
+
+setenv PATH ${PATH}:/usr/local/bin
+
+Or you can add ocaml to your path permanently (starting the next time
+you invoke the shell) by adding the following line to the end of your
+.cshrc file:
+
+setenv PATH ${PATH}:/usr/local/bin
+
+If you are running Bash then you can update PATH from the command line
+with:
+
+export PATH=$PATH:/usr/local/bin
+
+Or you can add ocaml to your path permanently (starting the next time
+you invoke the shell) by adding the following lines to the end of your
+.profile file:
+
+PATH=$PATH:/usr/local/bin
+export PATH
+
+
+Using the OCaml interpreter
+-------------------------
+
+Each expression or declaration should end with TWO semicolons.
+
+You can use any text editor (e.g., vi, emacs, notepad) to create a
+file containing OCaml declarations.  The text file need not end
+declarations with semicolons.  A text file of OCaml declarations can
+then be loaded in the interpreter by the command
+
+  #use "filename";;
+
+(Note: The # symbol is part of the command, separate from the # prompt
+that the OCaml interpreter uses.)
+
+The given filename should include the full path to the file, unless
+the OCaml interpreter was started from the same directory where the
+file resides.
+
+On Windows machines, you may have to escape your backslashes to make
+the use command work, for example:
+
+  #use "C:\\hw2.ml";;
+
+Quit the interpreter by ctrl-d. On some platforms it may instead be
+ctrl-z.
+
+
+OCaml Mode for Emacs
+---------------------
+
+For those of you using Emacs as your text editor, there is an OCaml
+mode that will do things like syntax highlighting. It can be found
+here:  https://forge.ocamlcore.org/frs/?group_id=43
+
+Follow the installation instructions provided with the download.
